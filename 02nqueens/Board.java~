@@ -1,0 +1,27 @@
+public class Board{
+    public int[][]board;
+    private int size;
+    public Board(int s){
+	size = s;
+	board=new int[s][s];
+    }
+
+    public int size(){
+	return size;
+    }
+
+    public void qRem(int x, int y){
+	board[x][y]=0;
+    }
+
+    public boolean qAdd(int x, int y){
+	if (board[x][y]<0){
+	    return false;
+	}
+	board[x][y]=1;
+	return true;
+    }
+
+
+
+}
