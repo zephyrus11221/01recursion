@@ -1,0 +1,10 @@
+public class Driver{
+    public static void main(String[]args){
+	Board a = new Board(6);
+	a.qAdd(0,0);
+	System.out.println(a);
+	a.qRem(0,0);
+	System.out.println(a);
+    }
+
+}

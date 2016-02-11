@@ -1,27 +1,85 @@
 public class Board{
-    public int[][]board;
+    private int[][]board;
     private int size;
     public Board(int s){
 	size = s;
 	board=new int[s][s];
+	for (int x = 0; x<size; x++){
+	    for (int y = 0; y<size; y++){
+		board[x][y]=0;
+	    }
+	}
     }
 
     public int size(){
 	return size;
     }
 
-    public void qRem(int x, int y){
-	board[x][y]=0;
-    }
-
-    public boolean qAdd(int x, int y){
-	if (board[x][y]<0){
+    public boolean qRem(int x, int y){
+	if(board[x][y]!=1){
 	    return false;
 	}
-	board[x][y]=1;
+	board[x][y]=0;
+	int offset=1;
+	while(y+offset < board[x].length){
+	    board[x][y+offset]++;
+	    if(x - offset >= 0){
+		board[x-offset][y+offset]++;
+	    }
+	    if(x + offset < board.length){
+		board[x+offset][y+offset]++;
+	    }
+	    offset++;
+	}
 	return true;
     }
 
+    public boolean solve(){
+	if (size==1){
+	    return true;
+	}
+	int col=
+	return t rue;
+    }
 
+    private boolean solveH(int col){
+	
+	return false;
+    }
 
+    public boolean qAdd(int x, int y){
+	if (board[x][y]!=0){
+	    return false;
+	}
+	board[x][y]=1;
+	int offset=1;
+	while(y+offset < board[x].length){
+	    board[x][y+offset]--;
+	    if(x - offset >= 0){
+		board[x-offset][y+offset]--;
+	    }
+	    if(x + offset < board.length){
+		board[x+offset][y+offset]--;
+	    }
+	    offset++;
+	}
+	return true;
+    }
+
+    public String toString(){
+	String otpt = "";
+	for (int x = 0; x<size; x++){
+	    for (int y = 0; y<size; y++){
+		if(board[x][y]<0){
+		    otpt += " ";
+		}
+		else{
+		    otpt += "  ";
+		}
+		otpt+=board[x][y];
+	    }
+	    otpt+="\n";
+	}
+	return otpt;
+    }
 }
