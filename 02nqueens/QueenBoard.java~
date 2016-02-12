@@ -20,7 +20,7 @@ public class Board{
     }
 
     public boolean qRem(int x, int y){
-	if(board[x][y]!=1){
+	if (board[x][y]!=1){
 	    return false;
 	}
 	board[x][y]=0;
@@ -47,6 +47,7 @@ public class Board{
 		//System.out.println(col);
 	    }else{
 		qRem(row,col);
+		board[row][col]=-1;
 	        col--;
 		//System.out.println(col);
 	    }

@@ -1,7 +1,7 @@
-public class Board{
+public class QueenBoard{
     private int[][]board;
-    private int size;
-    public Board(int s){
+    private int size, row;
+    public QueenBoard(int s){
 	size = s;
 	board=new int[s][s];
 	for (int x = 0; x<size; x++){
@@ -15,8 +15,12 @@ public class Board{
 	return size;
     }
 
+    public boolean qCheck(int x, int y){
+	return board[x][y]==1;
+    }
+
     public boolean qRem(int x, int y){
-	if(board[x][y]!=1){
+	if (board[x][y]!=1){
 	    return false;
 	}
 	board[x][y]=0;
@@ -35,20 +39,49 @@ public class Board{
     }
 
     public boolean solve(){
-	if (size==1){
-	    return true;
+	boolean otpt;
+	int col=0;
+	for (int x = 0; x<size; x++){
+	    if (solveH(col)){
+		col++;
+		//System.out.println(col);
+	    }else{
+		qRem(row,col);
+		board[row][col]=-1;
+	        col--;
+		//System.out.println(col);
+	    }
+	    //	    System.out.println(toString());
 	}
-	int col=
-	return t rue;
+	for (int y = 0; y<size; y++){
+	    if (qCheck(col,y)){
+		return true;
+	    }
+	}
+	return false;
     }
 
-    private boolean solveH(int col){
-	
+    public boolean solveH(int col){
+	int _row=0;
+	while (!qAdd(_row, col)&&_row<size-1){
+	    _row++;
+	    System.out.println(_row);
+	}
+	System.out.println(_row+""+col);
+	System.out.println(toString());
+	if (qCheck(_row, col)){
+	    System.out.println(toString());
+	    qAdd(_row, col);
+	    row=_row;
+	    return true;
+	}
+	System.out.println(toString());
+	qRem(col, _row);
 	return false;
     }
 
     public boolean qAdd(int x, int y){
-	if (board[x][y]!=0){
+	if (board[x][y]!=0&&board[x][y]!=2){
 	    return false;
 	}
 	board[x][y]=1;
