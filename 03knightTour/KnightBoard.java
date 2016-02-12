@@ -147,4 +147,20 @@ public class KnightBoard{
 	}
 	return otpt;
     }
+    public String printSolution(){
+	solve();
+	board[2][2] = 0;
+	String otpt = "";
+	for (int x = 0; x<size+4; x++){
+	    for (int y = 0; y<size+4; y++){
+		if (board[x][y]>9||board[x][y]<0){
+		    otpt+= " ";
+		}else{
+		    otpt+= "  ";
+		}
+		otpt += board[x][y];
+	    }
+	}
+	return otpt;
+    }
 }
