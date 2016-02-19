@@ -44,7 +44,7 @@ public class QueenBoard{
 
     private void colClear(int col){
 	int x = 0;
-	while (!qRem(x, col)&&x<size-2){
+	while (!qRem(x, col)&&x<size-1){
 	    x++;
 	}
     }
@@ -54,20 +54,27 @@ public class QueenBoard{
     }
 
     public boolean solveH(int col){
-
-
-
-
-
 	boolean added = false;
-	for (int x = 0; x<size-1; x++){
+	for (int x = 0; x<size; x++){
 	    if(qAdd(x, col)){
 		added=true;
-		System.out.println(toString());
 		if (col<size-1){
 		    if (solveH(col+1)){
-			added = false;
+			return true;
+		    }else{
+			added=false;
+			colClear(col+1);
 			colClear(col);
+		    }
+		}
+	    }
+	    if (col==size-1){
+		for(int y = 0; y<size; y++){
+		    if (board[y][col]==0){
+			qAdd(y, col);
+			return true;
+		    }else if(y==size-1){
+			return false;
 		    }
 		}
 	    }
@@ -105,6 +112,21 @@ public class QueenBoard{
 		    otpt += "  ";
 		}
 		otpt+=board[x][y];
+	    }
+	    otpt+="\n";
+	}
+	return otpt;
+    }
+    public String printSolution(){
+	String otpt = "";
+	for (int x = 0; x<size; x++){
+	    for (int y = 0; y<size; y++){
+		if(board[x][y]<1){
+		    otpt += "_ ";
+		}
+		else{
+		    otpt += "Q ";
+		}
 	    }
 	    otpt+="\n";
 	}
