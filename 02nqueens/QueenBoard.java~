@@ -1,7 +1,7 @@
-public class Board{
+public class QueenBoard{
     private int[][]board;
     private int size, row;
-    public Board(int s){
+    public QueenBoard(int s){
 	size = s;
 	board=new int[s][s];
 	for (int x = 0; x<size; x++){
