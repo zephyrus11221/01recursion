@@ -121,7 +121,7 @@ public class KnightBoard{
 		}
 	    }
 	}
-	if (steps==size*size&&board[2][2]==1){
+	if (steps==size*size-1){
 	    return true;
 	}
 	return false;

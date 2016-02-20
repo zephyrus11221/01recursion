@@ -10,6 +10,10 @@ public class QueenBoard{
 	    }
 	}
     }
+    
+    public String name(){
+	return "Doan,Stephan";
+    }
 
     public int size(){
 	return size;
@@ -38,46 +42,37 @@ public class QueenBoard{
 	return true;
     }
 
+    private void colClear(int col){
+	int x = 0;
+	while (!qRem(x, col)&&x<size-2){
+	    x++;
+	}
+    }
+
     public boolean solve(){
-	boolean otpt;
-	int col=0;
-	for (int x = 0; x<size; x++){
-	    if (solveH(col)){
-		col++;
-		//System.out.println(col);
-	    }else{
-		qRem(row,col);
-		board[row][col]=-1;
-	        col--;
-		//System.out.println(col);
-	    }
-	    //	    System.out.println(toString());
-	}
-	for (int y = 0; y<size; y++){
-	    if (qCheck(col,y)){
-		return true;
-	    }
-	}
-	return false;
+	return solveH(0);
     }
 
     public boolean solveH(int col){
-	int _row=0;
-	while (!qAdd(_row, col)&&_row<size-1){
-	    _row++;
-	    System.out.println(_row);
+
+
+
+
+
+	boolean added = false;
+	for (int x = 0; x<size-1; x++){
+	    if(qAdd(x, col)){
+		added=true;
+		System.out.println(toString());
+		if (col<size-1){
+		    if (solveH(col+1)){
+			added = false;
+			colClear(col);
+		    }
+		}
+	    }
 	}
-	System.out.println(_row+""+col);
-	System.out.println(toString());
-	if (qCheck(_row, col)){
-	    System.out.println(toString());
-	    qAdd(_row, col);
-	    row=_row;
-	    return true;
-	}
-	System.out.println(toString());
-	qRem(col, _row);
-	return false;
+	return added;
     }
 
     public boolean qAdd(int x, int y){
