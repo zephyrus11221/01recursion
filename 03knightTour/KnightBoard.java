@@ -24,6 +24,7 @@ public class KnightBoard{
     }
     public boolean move(int x, int y, int step){
 	if (steps<length*width){
+	    board[2][2]=1;
 	    if (board[x+2][y+1]==0&&step<1){
 		k[0]=x+2;
 		k[1]=y+1;
@@ -123,8 +124,10 @@ public class KnightBoard{
 	    }   
 	}
 	if (steps==length*width){
+	    board[2][2]=1;
 	    return true;
 	}
+	board[2][2]=0;
 	return false;
     }
 
@@ -150,7 +153,6 @@ public class KnightBoard{
     }
     public String printSolution(){
 	solve();
-	board[2][2] = 1;
 	String otpt = "";
 	for (int x = 2; x<length+2; x++){
 	    for (int y = 2; y<width+2; y++){

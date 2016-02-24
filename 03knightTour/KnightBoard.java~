@@ -1,28 +1,29 @@
 public class KnightBoard{
     public int[][] board;
-    public int size, steps = 0;
+    public int length, width, steps = 1;
     public int[]k = {0, 0};
 
 
-    public KnightBoard (int s){
-	board = new int[s+4][s+4];
-	size = s;
+    public KnightBoard (int l, int w){
+	board = new int[l+4][w+4];
+	length = l;
+	width = w;
 	int offset=0;
-	for (int x = 0; x<size+4; x++){
-	    board[offset][0]=-1;
-	    board[0][offset]=-1;
-	    board[offset][1]=-1;
-	    board[1][offset]=-1;
-	    board[size+3][offset]=-1;
-	    board[offset][size+3]=-1;
-	    board[size+2][offset]=-1;
-	    board[offset][size+2]=-1;
-	    offset++;
+	for (int x = 0; x<length+4; x++){
+	    board[0][x]=-1;
+	    board[1][x]=-1;
+	    board[length+3][x]=-1;
+	    board[length+2][x]=-1;
+	}
+	for (int x = 0; x<length+4; x++){
+	    board[x][0]=-1;
+	    board[x][1]=-1;
+	    board[x][width+3]=-1;
+	    board[x][width+2]=-1;
 	}
     }
     public boolean move(int x, int y, int step){
-	if (steps<size*size){
-	    System.out.println(toString()+"\n"+steps);
+	if (steps<length*width){
 	    if (board[x+2][y+1]==0&&step<1){
 		k[0]=x+2;
 		k[1]=y+1;
@@ -119,23 +120,25 @@ public class KnightBoard{
 		    board[x-1][y-2]=0;
 		    move(k[0], k[1], 8);
 		}
-	    }
+	    }   
 	}
-	if (steps==size*size-1){
+	if (steps==length*width){
+	    board[2][2]=1;
 	    return true;
 	}
+	board[2][2]=0;
 	return false;
     }
 
     public boolean solve(){
-	board[2][2]=-1;
+	board[2][2]=1;
 	return move(2,2,0);
     }
 
     public String toString(){
 	String otpt = "";
-	for (int x = 0; x<size+4; x++){
-	    for (int y = 0; y<size+4; y++){
+	for (int x = 0; x<length+4; x++){
+	    for (int y = 0; y<width+4; y++){
 		if (board[x][y]>9||board[x][y]<0){
 		    otpt+= " ";
 		}else{
@@ -149,17 +152,17 @@ public class KnightBoard{
     }
     public String printSolution(){
 	solve();
-	board[2][2] = 0;
 	String otpt = "";
-	for (int x = 0; x<size+4; x++){
-	    for (int y = 0; y<size+4; y++){
-		if (board[x][y]>9||board[x][y]<0){
+	for (int x = 2; x<length+2; x++){
+	    for (int y = 2; y<width+2; y++){
+		if (board[x][y]>9||board[x][y]<1){
 		    otpt+= " ";
 		}else{
 		    otpt+= "  ";
 		}
 		otpt += board[x][y];
 	    }
+	    otpt+="\n";
 	}
 	return otpt;
     }
