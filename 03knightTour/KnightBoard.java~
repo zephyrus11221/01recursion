@@ -24,6 +24,8 @@ public class KnightBoard{
     }
     public boolean move(int x, int y, int step){
 	if (steps<length*width){
+	    System.out.println(this);
+	    board[2][2]=1;
 	    if (board[x+2][y+1]==0&&step<1){
 		k[0]=x+2;
 		k[1]=y+1;
