@@ -1,4 +1,4 @@
-public class Recursion implements hw01{
+public class Recursion{
     public String name(){
 	return "Doan,Stephan";
     }
@@ -13,6 +13,9 @@ public class Recursion implements hw01{
     }
     public double sqrt(double n){
 	double guess=n/4;
+	if (n==1 || n==0){
+	    return n;
+	}
 	if (n<0){
 	    throw new IllegalArgumentException("Square root of negative is imaginary. Use a positive number.");
 	}
