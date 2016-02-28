@@ -25,7 +25,6 @@ public class Bronze{
 	c = in.nextInt();
 	e = in.nextInt();
 	n = in.nextInt();
-	System.out.println(e);
 	lake = new int[r][c];
 	for (int x = 0; x<r; x++){
 	    for (int y = 0; y<c; y++){
@@ -66,7 +65,6 @@ public class Bronze{
 	String otpt = "";
 	for (int x = 0; x<n; x++){
 	    dig(cmd[x*3]-1, cmd[x*3+1]-1, cmd[x*3+2]);
-	    System.out.println(this);
 	}
 	for (int x = 0; x<r; x++){
 	    for (int y = 0; y<c; y++){

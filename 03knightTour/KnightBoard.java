@@ -1,6 +1,7 @@
 public class KnightBoard{
     public int[][] board;
     public int length, width, steps = 0;
+    public int steps2 = 1; //for use in move2
     public int[]k = {0, 0};
 
     public String name(){
@@ -45,107 +46,107 @@ public class KnightBoard{
     }
 
     public boolean move2(int x, int y, int step){
-	if (steps<length*width){
+	if (steps2<length*width){
 	    board[2][2]=1;
 	    if (board[x+2][y+1]==0&&step<1){
 		k[0]=x+2;
 		k[1]=y+1;
-		steps++;
-		board[x+2][y+1]=steps;
+		steps2++;
+		board[x+2][y+1]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x+2][y+1]=0;
 		    move2(k[0], k[1], 1);
 		}
 	    }else if (board[x-2][y+1]==0&&step<2){
 		k[0]=x-2;
 		k[1]=y+1;
-		steps++;
-		board[x-2][y+1]=steps;
+		steps2++;
+		board[x-2][y+1]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x-2][y+1]=0;
 		    move2(k[0], k[1], 2);
 		}
 	    }else if (board[x+2][y-1]==0&&step<3){
 		k[0]=x+2;
 		k[1]=y-1;
-		steps++;
-		board[x+2][y-1]=steps;
+		steps2++;
+		board[x+2][y-1]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x+2][y-1]=0;
 		    move2(k[0], k[1], 3);
 		}
 	    }else if (board[x-2][y-1]==0&&step<4){
 		k[0]=x-2;
 		k[1]=y-1;
-		steps++;
-		board[x-2][y-1]=steps;
+		steps2++;
+		board[x-2][y-1]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x-2][y-1]=0;
 		    move2(k[0], k[1], 4);
 		}
 	    }else if (board[x+1][y+2]==0&&step<5){
 		k[0]=x+1;
 		k[1]=y+2;
-		steps++;
-		board[x+1][y+2]=steps;
+		steps2++;
+		board[x+1][y+2]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x+1][y+2]=0;
 		    move2(k[0], k[1], 5);
 		}
 	    }else if (board[x-1][y+2]==0&&step<6){
 		k[0]=x-1;
 		k[1]=y+2;
-		steps++;
-		board[x-1][y+2]=steps;
+		steps2++;
+		board[x-1][y+2]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x-1][y+2]=0;
 		    move2(k[0], k[1], 6);
 		}
 	    }else if (board[x+1][y-2]==0&&step<7){
 		k[0]=x+1;
 		k[1]=y-2;
-		steps++;
-		board[x+1][y-2]=steps;
+		steps2++;
+		board[x+1][y-2]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x+1][y-2]=0;
 		    move2(k[0], k[1], 7);
 		}
 	    }else if (board[x-1][y-2]==0&&step<8){
 		k[0]=x-1;
 		k[1]=y-2;
-		steps++;
-		board[x-1][y-2]=steps;
+		steps2++;
+		board[x-1][y-2]=steps2;
 		if (!move2(k[0], k[1], 0)){
 		    k[0]=x;
 		    k[1]=y;
-		    steps--;
+		    steps2--;
 		    board[x-1][y-2]=0;
 		    move2(k[0], k[1], 8);
 		}
 	    }   
 	}
-	if (steps==length*width){
+	if (steps2==length*width){
 	    board[2][2]=1;
 	    return true;
 	}
@@ -154,7 +155,7 @@ public class KnightBoard{
     }
 
     public boolean solve(){
-	return move(2,2);
+	return move2(2,2,0);
     }
 
     public String toString(){

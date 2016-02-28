@@ -3,6 +3,9 @@ public class KnightBoard{
     public int length, width, steps = 0;
     public int[]k = {0, 0};
 
+    public String name(){
+	return "Doan,Stephan";
+    }
 
     public KnightBoard (int l, int w){
 	board = new int[l+4][w+4];
