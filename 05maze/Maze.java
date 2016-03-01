@@ -29,8 +29,6 @@ public class Maze{
 		r++;
 	    }
 	    c = mazeHold.length()/r;
-	    System.out.println(c);
-	    System.out.println(r);
 	    char[] mazeChar = mazeHold.toCharArray();
 	    maze = new char[c][r];
 		for (int x = 0; x<c; x++){
@@ -41,7 +39,7 @@ public class Maze{
 	    in.close();
 	}catch (FileNotFoundException e){
 	    System.out.println("File not found. Try a different one.");
-	}
+	}/*
 	String otpt = "";
 	for (int x = 0; x<maze.length; x++){
 	    for (int y = 0; y<maze[x].length; y++){
@@ -50,16 +48,15 @@ public class Maze{
 	    otpt+="\n";
 	}
 	System.out.println(otpt);
+	 */
 	int _x = 0;
 	int _y = 0;
-	System.out.println(r);
 	while (startx<1 && _x<c){
 	    _y=0;
 	    while (starty<1 && _y<r){
 		if (maze[_x][_y]=='S'){
 		    starty=_y;
 		    startx=_x;
-		    //		    System.out.println(""+starty+" "+startx);
 		}
 		_y++;
 	    }
