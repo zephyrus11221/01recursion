@@ -1,0 +1,68 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+public class Silver{
+    private int[][] pasture;
+    private int n, m, t, r1, c1, r2, c2;
+    
+    public String name(){
+	return "Doan,Stephan";
+    }
+
+    public Silver(String file){
+	try{
+	Scanner in = new Scanner(new File(file));
+	n = in.nextInt();
+	m = in.nextInt();
+	t = in.nextInt();
+	lake = new int[n][m];
+	char[] lineHold;
+	for (int x = 0; x<n; x++){
+	    lineHold=in.nextLine().tocharArray();
+	    for (int y = 0; y<m; y++){
+		if (lineHold[y]=='.'){
+		    pasture[x][y]=0;
+		}else{
+		    pasture[x][y]=-1;
+		}
+	    }
+	}
+	r1 = in.nextInt();
+	c1 = in.nextInt();
+	r2 = in.nextInt();
+	c2 = in.nextInt();
+	in.close();
+	}catch (FileNotFoundException e){
+	    System.out.println("File not found. Try a different one.");
+	}
+    }
+    
+    public void disperse(int x, int y){
+	if (x-1>-1 && y-1>-1){
+	    pasture[x-1][y-1]+=pasture[x][y];
+	}
+	if (x-1>-1 && y+1<m){
+	    pasture[x-1][y+1]+=pasture[x][y];
+	}
+	if (x+1<n && y-1>-1){
+	    pasture[x+1][y-1]+=pasture[x][y];
+	}
+	if (x+1>n && y+1>m){
+	    pasture[x+1][y+1]+=pasture[x][y];
+	}
+    }
+    
+    public String toString(){
+	String otpt = ""
+	for (int x = 0; x<n; x++){
+	    for (int y = 0; y<m; y++){
+		otpt += pasture[x][y];
+	    }
+	    otpt+="\n";
+	}
+	otpt += r1 + " " + c1 + " " + r2 + " " + c2 + " "; 
+
+    public static void main(String[]args){
+	Silver a = new Silver("ctravel.in");
+    }
+}
