@@ -26,18 +26,12 @@ public class MergeSort{
 	return otpt;
     }
 
-    public static int[] shorter(int[] a, int[] b){
-	if (a.length<b.length){
-	    return a;
+    public static void merge(int[] data, int startA, int endA, int startB, int endB){
+	for (int x = startA; x<endA; x++){
+	    
 	}
-	return b;
-    }
-    
-    public static int[] longer(int[] a, int[] b){
-	if (shorter(a, b).equals(a)){
-	    return b;
-	}
-	return a;
+
+
     }
 
     public static void main(String[]args){
