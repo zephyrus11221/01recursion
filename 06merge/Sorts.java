@@ -1,6 +1,10 @@
 import java.util.Arrays;
 public class Sorts{
-    public static int[] merge(int[] a, int[] b){
+    public static String name(){
+	return "7,Doan,Stephan";
+    }
+
+    private static int[] merge(int[] a, int[] b){
 	int[] otpt = new int[a.length+b.length];
 	int[] small, large;
 	if (a.length<b.length){
@@ -28,7 +32,7 @@ public class Sorts{
 	return otpt;
     }
 
-    public static void merge(int[] data, int startA, int endA, int startB, int endB){
+    private static void merge(int[] data, int startA, int endA, int startB, int endB){
 	int y = 0;
 	int x = 0;
 	int[] large = new int[0];
@@ -64,11 +68,11 @@ public class Sorts{
 	System.out.println(Arrays.toString(data));
     }
     
-    public static void mergeSort(int[] data){
+    public static void mergesort(int[] data){
 	data = mergeSortH(data);
     }
 
-    public static int[] mergeSortH (int[] data){
+    private static int[] mergeSortH (int[] data){
 	if (data.length==2){
 	    merge(data,0,1,1,2);
 	    return data;

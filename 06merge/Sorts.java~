@@ -1,4 +1,5 @@
-public class MergeSort{
+import java.util.Arrays;
+public class Sorts{
     public static int[] merge(int[] a, int[] b){
 	int[] otpt = new int[a.length+b.length];
 	int[] small, large;
@@ -11,7 +12,7 @@ public class MergeSort{
 	}
 	int y = 0;
 	int x = 0;
-	for (; x<small.length;){
+	while(x<small.length){
 	    if (small[x]<large[y]){
 		otpt[x+y]=small[x];
 		x++;
@@ -20,29 +21,97 @@ public class MergeSort{
 		y++;
 	    }
 	}
-	for (; y<large.length; y++){
+	while (y<large.length){
 	    otpt[x+y]=large[y];
+	    y++;
 	}
 	return otpt;
     }
 
     public static void merge(int[] data, int startA, int endA, int startB, int endB){
-	for (int x = startA; x<endA; x++){
-	    
+	int y = 0;
+	int x = 0;
+	int[] large = new int[0];
+	int[] small = new int[0];
+	if (endA-startA>endB-startB){
+	    large = Arrays.copyOfRange(data, startA, endA);
+	    small = Arrays.copyOfRange(data, startB, endB);
+	}else{
+	    small = Arrays.copyOfRange(data, startA, endA);
+	    large = Arrays.copyOfRange(data, startB, endB);
 	}
+	System.out.println(Arrays.toString(small)+Arrays.toString(large));
+	while(x<small.length&&y<large.length){
+	    if (small[x]<large[y]){
+		data[startA+x+y]=small[x];
+		x++;
+	    }else{
+		data[startA+x+y]=large[y];
+		y++;
+	    }
+	}
+	if (large.length==small.length){
+	    if (y<x){
+		data[startA+x+y]=large[y];
+	    }else{
+		data[startA+x+y]=small[x];
+	    }
+	}
+	while (y<large.length){
+	    data[startA+x+y]=large[y];
+	    y++;
+	}
+	System.out.println(Arrays.toString(data));
+    }
+    
+    public static void mergeSort(int[] data){
+	data = mergeSortH(data);
+    }
 
-
+    public static int[] mergeSortH (int[] data){
+	if (data.length==2){
+	    merge(data,0,1,1,2);
+	    return data;
+	}
+	if (data.length==3){
+	    merge(data,0,1,1,2);
+	    merge(data,0,2,2,3);
+	    return data;
+	    }
+	int y = 1;
+	int x = 0;
+	for (;y<data.length/2; y*=2){
+	    x = 0;
+	    for (; x<data.length-2*y; x+=2*y){
+		merge(data, x, x+y, x+y, x+2*y);
+	    }
+	}
+	if(data.length%2==1){
+	    merge(data, 0, y, y, data.length-1);
+	    merge(data, 0, data.length-1, data.length-1, data.length);
+	}else{
+	    merge(data, 0, y, y, data.length-2);
+	    merge(data, data.length-2, data.length-1, data.length-1, data.length);
+	    merge(data, 0, data.length-2, data.length-2, data.length);
+	}
+	return data;
     }
 
     public static void main(String[]args){
 	int[] a = new int[] {1, 5, 8, 10};
 	int[] b = new int[] {3, 4, 6, 9, 11};
-	int[] c = merge(a,b);
-	String otpt = "";
-	for (int x = 0; x<c.length; x++){
-	    otpt += c[x];
-	}
-	System.out.println(otpt);
+	int[] c = new int[] {1, 5, 8, 10, 3, 4, 6, 9, 11};
+	int[] d = merge(a,b);
+	int[] e = new int[] {1, 5, 2, 10, 7, 15, 11, 9, 14, 18, 25, 20};
+	int[] f = new int[] {3, 2};
+	int[] g = new int[] {20, 18, 324, 10, 1, 324, 20, 334, 1, 394};
+	//	System.out.println(Arrays.toString(f)+"Hello");
+	mergeSort(c);
+	System.out.println(Arrays.toString(c));
+	mergeSort(e);
+	System.out.println(Arrays.toString(e));
+	mergeSort(g);
+	System.out.println(Arrays.toString(g));
     }
 
 }
