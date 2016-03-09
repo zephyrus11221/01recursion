@@ -1,0 +1,39 @@
+import java.util.Random;
+import java.util.Arrays;
+public class Quick{
+    public int partition(int[] data, int left, int right){
+	Random RNG = new Random();
+	int spot = Random(right-left)+left;
+	int value = data[spot];
+	data[spot]=data[data.length-1];
+	data[data.length-1]=hold;
+	int x = 0;
+	int y = data.length-2;
+	int hold = 0;
+	while(x!=y){
+	    if(data[x]>hold){
+		hold = data[x];
+		data[x] = data[y];
+		data[y] = hold;
+		y++;
+	    }else{
+		x++;
+	    }
+	}
+	if(data[y]>value){
+	    data[data.length-1]=data[y];
+	    data[y]=value;
+	    return y;
+	}else{
+	    data[data.length-1]=data[y+1];
+	    data[y+1]=value;
+	    return y+1;
+	}
+    }
+
+
+    public static void main(String[]args){
+	int[] a = new int[]{9, 39, 10, -3, 13, 56, 98, 70}
+	System.out.println(partition(a, 0, 7));
+	System.out.println(Arrays.toString(a));
+}
