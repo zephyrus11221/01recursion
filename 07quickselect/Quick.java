@@ -10,10 +10,10 @@ public class Quick{
 	Random RNG = new Random();
 	int spot = RNG.nextInt(right-left)+left;
 	int value = data[spot];
-	data[spot]=data[data.length-1];
-	data[data.length-1]=value;
-	int x = 0;
-	int y = data.length-2;
+	data[spot]=data[right];
+	data[right]=value;
+	int x = left;
+	int y = right-1;
 	int hold = 0;
 	while(x!=y){
 	    if(data[x]>value){
@@ -26,11 +26,11 @@ public class Quick{
 	    }
 	}
 	if(data[y]>value){
-	    data[data.length-1]=data[y];
+	    data[right]=data[y];
 	    data[y]=value;
 	    return y;
 	}else{
-	    data[data.length-1]=data[y+1];
+	    data[right]=data[y+1];
 	    data[y+1]=value;
 	    return y+1;
 	}
@@ -40,6 +40,19 @@ public class Quick{
 	return quickselect(data, k, 0, data.length-1);
     }
 
+    public static void quickSort(int[]data){
+	quickSort(data, 0, data.length-1);
+    }
+
+    public static void quickSort(int[]data, int left, int right){
+	if (right-left>=1){
+	    int index = partition(data,left,right);
+	    System.out.println(Arrays.toString(data)+data[index]);
+	    quickSort(data,left,index-1);
+	    quickSort(data,index+1,right);
+	}
+    }
+	
     public static int quickselect(int[]data, int k, int left, int right){
 	if (right==left){
 	    return data[left];
@@ -58,9 +71,15 @@ public class Quick{
     public static void main(String[]args){
 	int[] a = new int[]{9, 39, 10, -3, 13, 56, 98, 70};
 	int[] b = new int[]{3, 5, 89, 76, 20, -18, 4, 205};
+	int[] c = new int[]{89, 90, 12, 26, 1, -90, 15, 1789, 34};
 	System.out.println(partition(a, 0, 7));
 	System.out.println(Arrays.toString(a));
 	System.out.println("----------------------------------------");
 	System.out.println(quickselect(b, 2));
+	System.out.println("----------------------------------------");
+	quickSort(c);
+	System.out.println(Arrays.toString(c));
+
+
     }
 }
