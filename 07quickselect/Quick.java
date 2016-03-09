@@ -32,7 +32,6 @@ public class Quick{
 	}else{
 	    data[data.length-1]=data[y+1];
 	    data[y+1]=value;
-	    System.out.println(Arrays.toString(data));
 	    return y+1;
 	}
     }
@@ -42,14 +41,18 @@ public class Quick{
     }
 
     public static int quickselect(int[]data, int k, int left, int right){
+	if (right==left){
+	    return data[left];
+	}
 	int index = partition(data, left, right);
-	if (k==index){
-	    return data[k];
-	}
 	if (k<index){
-	    return quickselect(data, k, left, index);
+	    return quickselect(data, k, left, index-1);
 	}
-	return quickselect(data, k, index, right);
+	if (k>index){
+	    return quickselect(data, k, index+1, right);
+	}
+	return data[k];
+	  
     }
 
     public static void main(String[]args){
