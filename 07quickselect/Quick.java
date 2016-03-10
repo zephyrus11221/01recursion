@@ -47,7 +47,6 @@ public class Quick{
     public static void quickSort(int[]data, int left, int right){
 	if (right-left>=1){
 	    int index = partition(data,left,right);
-	    System.out.println(Arrays.toString(data)+data[index]);
 	    quickSort(data,left,index-1);
 	    quickSort(data,index+1,right);
 	}
