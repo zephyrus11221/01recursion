@@ -10,10 +10,10 @@ public class Quick{
 	Random RNG = new Random();
 	int spot = RNG.nextInt(right-left)+left;
 	int value = data[spot];
-	data[spot]=data[data.length-1];
-	data[data.length-1]=value;
-	int x = 0;
-	int y = data.length-2;
+	data[spot]=data[right];
+	data[right]=value;
+	int x = left;
+	int y = right-1;
 	int hold = 0;
 	while(x!=y){
 	    if(data[x]>value){
@@ -26,11 +26,11 @@ public class Quick{
 	    }
 	}
 	if(data[y]>value){
-	    data[data.length-1]=data[y];
+	    data[right]=data[y];
 	    data[y]=value;
 	    return y;
 	}else{
-	    data[data.length-1]=data[y+1];
+	    data[right]=data[y+1];
 	    data[y+1]=value;
 	    return y+1;
 	}
@@ -47,13 +47,11 @@ public class Quick{
     public static void quickSort(int[]data, int left, int right){
 	if (right-left>=1){
 	    int index = partition(data,left,right);
-	    System.out.println(Arrays.toString(data));
 	    quickSort(data,left,index-1);
 	    quickSort(data,index+1,right);
 	}
     }
 	
-
     public static int quickselect(int[]data, int k, int left, int right){
 	if (right==left){
 	    return data[left];
