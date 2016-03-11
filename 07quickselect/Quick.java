@@ -9,6 +9,7 @@ public class Quick{
     public static int partitionOld(int[] data, int left, int right){
 	Random RNG = new Random();
 	int spot = RNG.nextInt(right-left)+left;
+	System.out.println(""+ left+ " " + right);
 	int value = data[spot];
 	data[spot]=data[right];
 	data[right]=value;
@@ -168,11 +169,12 @@ public class Quick{
 	    }
 	}
 
-	/*
+	
 	System.out.println(partitionOld(a, 0, 7));
 	System.out.println(Arrays.toString(a));
 	System.out.println("----------------------------------------");
-	System.out.println(quickselectOld(b, 2));
+	quickSortOld(b);
+	System.out.println(b);
 	System.out.println("----------------------------------------");
 	quickSort(c);
 	System.out.println(Arrays.toString(c));
@@ -191,9 +193,8 @@ public class Quick{
         long end = System.currentTimeMillis();
 
         System.out.println("Time:"+ (end-start)/1000.0 + " seconds. Size = "+d.length);
-*/
 
-	long start = System.currentTimeMillis();
+	start = System.currentTimeMillis();
 	
         if(args[0].equals("A")){
             Arrays.sort(e);
@@ -204,7 +205,7 @@ public class Quick{
         if(args[0].equals("O")){
             quickSortOld(e);
         }
-        long end = System.currentTimeMillis();
+        end = System.currentTimeMillis();
 
         System.out.println("Time:"+ (end-start)/1000.0 + " seconds. Size = "+e.length);
 
