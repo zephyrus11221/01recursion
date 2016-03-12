@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 public class Sorts{
     public static String name(){
 	return "7,Doan,Stephan";
@@ -53,17 +54,29 @@ public class Sorts{
 		data[startA+x+y]=large[y];
 		y++;
 	    }
-	}
+	}/*
 	if (large.length==small.length){
 	    if (y<x){
 		data[startA+x+y]=large[y];
 	    }else{
 		data[startA+x+y]=small[x];
 	    }
-	}
-	while (y<large.length){
-	    data[startA+x+y]=large[y];
-	    y++;
+	}else{
+	    while (y<large.length){
+		data[startA+x+y]=large[y];
+		y++;
+	    }
+	}*/
+	if (y==large.length){
+	    while (x<small.length){
+		data[startA+x+y]=small[x];
+		x++;
+	    }
+	}else{
+	    while (y<large.length){
+		data[startA+x+y]=large[y];
+		y++;
+	    }
 	}
 	System.out.println(Arrays.toString(data));
     }
@@ -108,14 +121,30 @@ public class Sorts{
 	int[] d = merge(a,b);
 	int[] e = new int[] {1, 5, 2, 10, 7, 15, 11, 9, 14, 18, 25, 20};
 	int[] f = new int[] {3, 2};
-	int[] g = new int[] {20, 18, 324, 10, 1, 324, 20, 334, 1, 394};
+	int[] g = new int[] {20, 18, 20, 10, 1, 324, 324, 334, 1, 394};
+	int[] h = new int[20];
+	int[] i = new int[20];
+	Random RNG = new Random();
+	int val;
+	for( int x = 0; x < 20; x++){
+	    val = RNG.nextInt(15);
+	    h[x]=val;
+	    i[x]=val;
+	}
 	//	System.out.println(Arrays.toString(f)+"Hello");
-	mergeSort(c);
+	/*	mergesort(c);
 	System.out.println(Arrays.toString(c));
-	mergeSort(e);
+	mergesort(e);
 	System.out.println(Arrays.toString(e));
-	mergeSort(g);
-	System.out.println(Arrays.toString(g));
+	mergesort(g);
+	System.out.println(Arrays.toString(g));*/
+	System.out.println(Arrays.toString(h));
+	System.out.println(Arrays.toString(i));
+	Arrays.sort(h);
+	mergesort(i);
+	System.out.println(Arrays.toString(h)+"a");
+	System.out.println(Arrays.toString(i)+"mine");
+	System.out.println(Arrays.equals(h,i));
     }
 
 }

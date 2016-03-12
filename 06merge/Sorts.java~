@@ -1,6 +1,11 @@
 import java.util.Arrays;
+import java.util.Random;
 public class Sorts{
-    public static int[] merge(int[] a, int[] b){
+    public static String name(){
+	return "7,Doan,Stephan";
+    }
+
+    private static int[] merge(int[] a, int[] b){
 	int[] otpt = new int[a.length+b.length];
 	int[] small, large;
 	if (a.length<b.length){
@@ -28,7 +33,7 @@ public class Sorts{
 	return otpt;
     }
 
-    public static void merge(int[] data, int startA, int endA, int startB, int endB){
+    private static void merge(int[] data, int startA, int endA, int startB, int endB){
 	int y = 0;
 	int x = 0;
 	int[] large = new int[0];
@@ -64,11 +69,11 @@ public class Sorts{
 	System.out.println(Arrays.toString(data));
     }
     
-    public static void mergeSort(int[] data){
+    public static void mergesort(int[] data){
 	data = mergeSortH(data);
     }
 
-    public static int[] mergeSortH (int[] data){
+    private static int[] mergeSortH (int[] data){
 	if (data.length==2){
 	    merge(data,0,1,1,2);
 	    return data;
@@ -104,14 +109,30 @@ public class Sorts{
 	int[] d = merge(a,b);
 	int[] e = new int[] {1, 5, 2, 10, 7, 15, 11, 9, 14, 18, 25, 20};
 	int[] f = new int[] {3, 2};
-	int[] g = new int[] {20, 18, 324, 10, 1, 324, 20, 334, 1, 394};
+	int[] g = new int[] {20, 18, 20, 10, 1, 324, 324, 334, 1, 394};
+	int[] h = new int[20];
+	int[] i = new int[20];
+	Random RNG = new Random();
+	int val;
+	for( int x = 0; x < 20; x++){
+	    val = RNG.nextInt(15);
+	    h[x]=val;
+	    i[x]=val;
+	}
 	//	System.out.println(Arrays.toString(f)+"Hello");
-	mergeSort(c);
+	mergesort(c);
 	System.out.println(Arrays.toString(c));
-	mergeSort(e);
+	mergesort(e);
 	System.out.println(Arrays.toString(e));
-	mergeSort(g);
+	mergesort(g);
 	System.out.println(Arrays.toString(g));
+	System.out.println(Arrays.toString(h));
+	System.out.println(Arrays.toString(i));
+	Arrays.sort(h);
+	mergesort(i);
+	System.out.println(Arrays.toString(h)+"a");
+	System.out.println(Arrays.toString(i)+"mine");
+	System.out.println(Arrays.equals(h,i));
     }
 
 }
