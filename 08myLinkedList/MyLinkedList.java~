@@ -1,0 +1,66 @@
+public class MyLinkedList{
+    private class LNode{
+	private int value;
+	private LNode next;
+
+	public LNode(int val){
+	    value=val;
+	    next = null;
+	}
+
+	public int get(){
+	    return value;
+	}
+
+	public void set(int val){
+	    value=val;
+	    next = null;
+	}
+
+	public LNode nextNode(){
+	    return next;
+	}    
+	
+	public void setNext(LNode node){
+	    next = node;
+	}
+
+    }
+
+    private LNode start;
+    private int size;
+    
+    public MyLinkedList(){
+	start = LNode(0);
+	size = 1;
+    }
+
+    public MyLinkedList(int length){
+	start = LNode(0);
+	size = length;
+	int x = 0;
+	LNode current = start;
+	while (x<length){
+	    current.setNext(LNode(0));
+	    current = current.nextNode();
+	    x++;
+	}
+    }
+
+    public int size(){
+	return size;
+    }
+
+    public String toString(){
+	String otpt = "";
+	LNode current = start;
+	for (int x = 0; x<size; x++){
+	    otpt+=current.get();
+	    current = start.nextNode();
+	    otpt+="-";
+	}
+	return otpt;
+    }
+    
+    
+}
