@@ -14,7 +14,6 @@ public class MyLinkedList{
 
 	public void set(int val){
 	    value=val;
-	    next = null;
 	}
 
 	public LNode nextNode(){
@@ -29,38 +28,78 @@ public class MyLinkedList{
 
     private LNode start;
     private int size;
-    
-    public MyLinkedList(){
-	start = LNode(0);
-	size = 1;
-    }
-
-    public MyLinkedList(int length){
-	start = LNode(0);
-	size = length;
-	int x = 0;
-	LNode current = start;
-	while (x<length){
-	    current.setNext(LNode(0));
-	    current = current.nextNode();
-	    x++;
-	}
-    }
 
     public int size(){
 	return size;
     }
 
-    public String toString(){
-	String otpt = "";
+    public int get(int index){
+	int x = index;
 	LNode current = start;
-	for (int x = 0; x<size; x++){
-	    otpt+=current.get();
-	    current = start.nextNode();
-	    otpt+="-";
+	while (x<size-1){
+	    current = current.nextNode();
 	}
+	return current.get();
+    }
+
+    public int set(int index, int newValue){
+	LNode current = start;
+	int x = 0;
+	while (x<index){
+	    current = current.nextNode();
+	    x++;
+	}
+	int otpt = current.get();
+	current.set(newValue);
 	return otpt;
     }
     
+    public boolean add(int index, int value){
+	LNode current = start;
+	int x = 0;
+	if (index>=size||index<0){
+	    return false;
+	}
+	while (x<index){
+	    current=current.nextNode();
+	    x++;
+	}
+	LNode hold = current;
+	current.set(value);
+	current.setNext(hold);
+	size++;
+	return true;
+    }
+    
+    public boolean add(int value){
+	if(start == null){
+	    start = new LNode(value);
+	    return true;
+	}
+	LNode current = start;
+	while (current.nextNode()!=null){
+	    current = current.nextNode();
+	}
+	current.setNext(new LNode(value));
+	size++;
+	return true;
+    }
+
+    public String toString(){
+	String otpt = "[";
+	LNode current = start;
+	if(start!=null){
+	    otpt += current.get();
+	}
+	int x = 0;
+	while(x<size){
+	    otpt+=", ";
+	    current = current.nextNode();
+	    otpt+=current.get();
+	    x++;
+	}
+	otpt+="]";
+	return otpt;
+    }
     
 }

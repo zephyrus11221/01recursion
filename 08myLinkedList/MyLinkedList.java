@@ -14,7 +14,6 @@ public class MyLinkedList{
 
 	public void set(int val){
 	    value=val;
-	    System.out.println(val);
 	}
 
 	public LNode nextNode(){
@@ -29,23 +28,6 @@ public class MyLinkedList{
 
     private LNode start;
     private int size;
-    
-    public MyLinkedList(){
-	start = new LNode(0);
-	size = 1;
-    }
-
-    public MyLinkedList(int length){
-	start = new LNode(0);
-	size = length;
-	int x = 0;
-	LNode current = start;
-	while (x<length-1){
-	    current.setNext(new LNode(0));
-	    current = current.nextNode();
-	    x++;
-	}
-    }
 
     public int size(){
 	return size;
@@ -64,7 +46,6 @@ public class MyLinkedList{
 	LNode current = start;
 	int x = 0;
 	while (x<index){
-	    System.out.println(this);
 	    current = current.nextNode();
 	    x++;
 	}
@@ -79,33 +60,66 @@ public class MyLinkedList{
 	if (index>=size||index<0){
 	    return false;
 	}
-	while (x<index){
+	while (x<index-1){
 	    current=current.nextNode();
+	    x++;
 	}
-	LNode hold = current;
-	current.set(value);
-	current.setNext(hold);
+	LNode add = new LNode(value);
+	add.setNext(current.nextNode());
+	current.setNext(add);
+	size++;
 	return true;
     }
     
     public boolean add(int value){
+	if(start == null){
+	    start = new LNode(value);
+	    return true;
+	}
 	LNode current = start;
-	int x = 0;
-	while (x<size-1){
+	while (current.nextNode()!=null){
 	    current = current.nextNode();
 	}
 	current.setNext(new LNode(value));
+	size++;
 	return true;
+    }
+
+    public int remove(){
+	int ret = start.get();
+	start = start.nextNode();
+	size--;
+	return ret;
+    }
+    
+    public int remove(int index){
+	if(index == 0){
+	    return remove();
+	}
+	LNode current = start;
+	int x = 0;
+	while(x<index-1){
+	    current = current.nextNode();
+	    x++;
+	}
+	int ret = current.nextNode().get();
+	current.setNext(current.nextNode().nextNode());
+	size--;
+	return ret;
     }
 
     public String toString(){
 	String otpt = "[";
 	LNode current = start;
-	otpt += current.get();
-	for (int x = 0; x<size-1; x++){
+	if(start!=null){
+	    otpt += current.get();
+	}
+	int x = 0;
+	while(x<size){
 	    otpt+=", ";
 	    current = current.nextNode();
 	    otpt+=current.get();
+	    x++;
 	}
 	otpt+="]";
 	return otpt;
