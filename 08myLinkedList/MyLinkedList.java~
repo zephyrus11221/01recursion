@@ -60,13 +60,13 @@ public class MyLinkedList{
 	if (index>=size||index<0){
 	    return false;
 	}
-	while (x<index){
+	while (x<index-1){
 	    current=current.nextNode();
 	    x++;
 	}
-	LNode hold = current;
-	current.set(value);
-	current.setNext(hold);
+	LNode add = new LNode(value);
+	add.setNext(current.nextNode());
+	current.setNext(add);
 	size++;
 	return true;
     }
@@ -83,6 +83,29 @@ public class MyLinkedList{
 	current.setNext(new LNode(value));
 	size++;
 	return true;
+    }
+
+    public int remove(){
+	int ret = start.get();
+	start = start.nextNode();
+	size--;
+	return ret;
+    }
+    
+    public int remove(int index){
+	if(index == 0){
+	    return remove();
+	}
+	LNode current = start;
+	int x = 0;
+	while(x<index-1){
+	    current = current.nextNode();
+	    x++;
+	}
+	int ret = current.nextNode().get();
+	current.setNext(current.nextNode().nextNode());
+	size--;
+	return ret;
     }
 
     public String toString(){

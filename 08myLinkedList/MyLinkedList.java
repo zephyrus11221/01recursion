@@ -1,18 +1,17 @@
-public class MyLinkedList{
+public class MyLinkedList <T>{
     private class LNode{
-	private int value;
+	private T value;
 	private LNode next;
 
-	public LNode(int val){
+	public LNode(T val){
 	    value=val;
-	    next = null;
 	}
 
-	public int get(){
+	public T get(){
 	    return value;
 	}
 
-	public void set(int val){
+	public void set(T val){
 	    value=val;
 	}
 
@@ -28,12 +27,13 @@ public class MyLinkedList{
 
     private LNode start;
     private int size;
+    private LNode end = start;
 
     public int size(){
 	return size;
     }
 
-    public int get(int index){
+    public T get(int index){
 	int x = index;
 	LNode current = start;
 	while (x<size-1){
@@ -42,19 +42,19 @@ public class MyLinkedList{
 	return current.get();
     }
 
-    public int set(int index, int newValue){
+    public T set(int index, T newValue){
 	LNode current = start;
 	int x = 0;
 	while (x<index){
 	    current = current.nextNode();
 	    x++;
 	}
-	int otpt = current.get();
+	T otpt = current.get();
 	current.set(newValue);
 	return otpt;
     }
     
-    public boolean add(int index, int value){
+    public boolean add(int index, T value){
 	LNode current = start;
 	int x = 0;
 	if (index>=size||index<0){
@@ -68,31 +68,48 @@ public class MyLinkedList{
 	add.setNext(current.nextNode());
 	current.setNext(add);
 	size++;
+	end=end.nextNode();
 	return true;
     }
     
-    public boolean add(int value){
+    public int find(T val){
+	int otpt = 0;
+	LNode current = start;
+	while (!(current.get().equals(val))){
+	    current = current.nextNode();
+	    otpt++;
+	}
+	return otpt;
+    }
+
+    public boolean add(T value){
 	if(start == null){
 	    start = new LNode(value);
+	    end = start;
 	    return true;
 	}
+	/*
 	LNode current = start;
 	while (current.nextNode()!=null){
 	    current = current.nextNode();
 	}
 	current.setNext(new LNode(value));
 	size++;
+	*/
+	end.setNext(new LNode(value));
+	end = end.nextNode();
+	size++;
 	return true;
     }
 
-    public int remove(){
-	int ret = start.get();
+    public T remove(){
+	T ret = start.get();
 	start = start.nextNode();
 	size--;
 	return ret;
     }
     
-    public int remove(int index){
+    public T remove(int index){
 	if(index == 0){
 	    return remove();
 	}
@@ -102,7 +119,7 @@ public class MyLinkedList{
 	    current = current.nextNode();
 	    x++;
 	}
-	int ret = current.nextNode().get();
+	T ret = current.nextNode().get();
 	current.setNext(current.nextNode().nextNode());
 	size--;
 	return ret;

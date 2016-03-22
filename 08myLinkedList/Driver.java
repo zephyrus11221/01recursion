@@ -1,6 +1,6 @@
 public class Driver{
     public static void main(String[]args){
-	MyLinkedList b = new MyLinkedList();
+	MyLinkedList <String> b = new MyLinkedList<String>();
 	/*
 	System.out.println(a);
 	a.set(0, 1);
@@ -9,18 +9,20 @@ public class Driver{
 	System.out.println(a);
 	*/
 	System.out.println(b);
-	b.add(0);
-	b.add(3);
-	b.add(0);
-	b.add(3);
-	b.add(0);
-	b.add(3);
-	b.add(0);
-	b.add(3);
-	b.add(0);
-	b.add(3);
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
 	System.out.println(b);
-	b.add(2, 4);
+	b.add(2, new String("WOOO LAWDY ITS A STRING"));
 	System.out.println(b);
 	b.remove(0);
 	System.out.println(b);
