@@ -1,0 +1,28 @@
+public class Driver{
+    public static void main(String[]args){
+	MyLinkedList <String> b = new MyLinkedList<String>();
+	System.out.println(a);
+	a.set(0, 1);
+	System.out.println(a);
+	a.set(2, 2);
+	System.out.println(a);
+	System.out.println(b);
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	System.out.println(b);
+	b.add(2, new String("WOOO LAWDY ITS A STRING"));
+	System.out.println(b);
+	b.remove(0);
+	System.out.println(b);
+    }
+}
