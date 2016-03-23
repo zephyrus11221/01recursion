@@ -1,4 +1,24 @@
-public class MyLinkedList <T>{
+import java.util.*;
+import java.lang.UnsupportedOperationException;
+public class MyLinkedList <T> implements Iterable<T>{
+    private class LLIterator implements Iterator<T>{
+	LNode current;
+	public boolean hasNext(){
+	    return current==null;
+	}
+	public T next(){
+	    current=current.nextNode();
+	    return current.get();
+	}
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
+    }
+    
+    public Iterator<T> iterator(){
+	return new LLIterator();
+    }
+
     private class LNode{
 	private T value;
 	private LNode next;
@@ -95,7 +115,7 @@ public class MyLinkedList <T>{
 	return true;
     }
     
-    public int find(T val){
+    public int indexOf(T val){
 	int otpt = 0;
 	LNode current = start;
 	while (otpt<size){
