@@ -1,0 +1,21 @@
+public class MyStack<T>{
+    private MyLinkedList<T> data;
+    
+    public MyStack(){
+	data = new MyLinkedList<T>();
+    }
+
+    public void push(T item){
+	data.add(0, item);
+    }
+    
+    public T pop(){
+	return data.remove();
+    }
+    
+    public T peek(){
+	return data.get(0);
+    }
+    
+    public int size(){
+	return data.size();

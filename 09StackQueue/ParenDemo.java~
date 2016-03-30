@@ -1,0 +1,36 @@
+public class ParenDemo{
+    private static MyStack<String> paren;
+    
+    public ParenDemo(){
+	paren = new MyStack<String>();
+    }
+    
+    public static boolean isMatching(String s){
+	String hold,val;
+	for (int x = 0; x<s.length(); x++){
+	    hold = s.substring(x,x+1);
+	    if(hold.equals("(")||
+	       hold.equals("[")||
+	       hold.equals("{")||
+	       hold.equals("<")){
+		paren.push(hold);
+	    }
+	    else if(hold.equals(")")||
+		    hold.equals("]")||
+		    hold.equals("}")||
+		    hold.equals(">")){
+		val = paren.peek();
+		if (paren.isEmpty()){
+		    return false;
+		}
+		if (hold.equals(val)){
+		    paren.pop();
+		}
+		else{
+		    return false;
+		}
+	    }
+	}
+	return true;
+    }
+}
