@@ -1,0 +1,7 @@
+public class Driver{
+    public static void main(String[]args){
+	MyLinkedList<String> a = new MyLinkedList<String>();
+	a.add("first");
+	System.out.println(a);
+    }
+}
