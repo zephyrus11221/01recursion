@@ -79,11 +79,11 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    temp = head;
 	    while(index > 0){
 		temp = temp.getNext();
-		index --;
+		index--;
 	    }
 	}else{
 	    temp = tail;
-	    while(index <= size){
+	    while(index < size){
 		temp = temp.getPrev();
 		index++;
 	    }
@@ -115,6 +115,12 @@ public class MyLinkedList<T> implements Iterable<T>{
 		tail = null;
 	    }
 	    return temp.getValue();
+	}
+	if(index == size){
+	    T ret = tail.getValue();
+	    tail=tail.getPrev();
+	    size--;
+	    return ret;
 	}else{
 	    LNode p = getNth(index-1);
 	    temp = p.getNext();
@@ -138,6 +144,9 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    if(size==0){
 		tail = head;
 	    }
+	}else if(index==size){
+	    size++;
+	    return add(value);
 	}else{ 
 	    LNode p = getNth(index-1);
 	    temp.setNext(p.getNext());

@@ -1,6 +1,32 @@
 import java.util.*;
 public class Driver{
     public static void main(String[]args){
+	MyLinkedList <String> b = new MyLinkedList<String>();
+	/*
+	System.out.println(a);
+	a.set(0, 1);
+	System.out.println(a);
+	a.set(2, 2);
+	System.out.println(a);
+	System.out.println(b);
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	b.add(new String("0"));
+	b.add(new String("3"));
+	System.out.println(b);
+	b.add(2, new String("WOOO LAWDY ITS A STRING"));
+	System.out.println(b);
+	b.remove(0);
+	System.out.println(b);
+	*/
 	MyLinkedList<String> m = new MyLinkedList<String>();
         ArrayList<String>    n = new ArrayList<String>();
 
@@ -56,7 +82,7 @@ public class Driver{
 
         m.remove(m.size()-1);
         n.remove(n.size()-1);
-        System.out.println(m.toString()+"gr8");
+        System.out.println(m.toString());
         System.out.println(n);
 
         //test adding to end/start
@@ -74,8 +100,8 @@ public class Driver{
         System.out.println(n);
 
         //test remove random items:
-        Random rand = new Random(1);
-        for(int i = 0; i < 6000; i++){
+        Random rand = new Random(0);
+        for(int i = 0; i < 600; i++){
             int op = rand.nextInt(4);
 	    //System.out.println(n.toString()+m.toString());
             if(op == 0 || n.size()==0){//ensure never empty
@@ -84,25 +110,51 @@ public class Driver{
             }else if(op == 1 ){
                 int x = rand.nextInt(n.size());
 		//System.out.println(x);
-                //n.add(x,""+i);
-                //m.add(x,""+i);
-            }/*else{
+                n.add(x,""+i);
+                m.add(x,""+i);
+            }else{
                 int x = rand.nextInt(n.size());
 		//System.out.println(x);
                 if(!n.remove(x).equals(m.remove(x))){
                     System.out.println("Non matching elements removed\n");
                     System.exit(1);
                 }
-		}*/
+            }
         }
-	System.out.println(m.toString()+"hello");
-	/*
-	String otpt = "";
-	for(String x: m){
-	    otpt+=x;
-	}
-	System.out.println(otpt);*/
+        System.out.println(m.toString());
         System.out.println(n);
 
+        //test speed of add in front and at end.
+        long start,end;
+        System.out.println("Add 100k to front");
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 100000; i++)
+            n.add(0,""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "ArrayList "+(end-start)/1000.0 );
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 100000; i++)
+            m.add(0,""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "LinkedList "+(end-start)/1000.0 );
+
+
+        System.out.println("Add 1m to end");
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 1000000; i++)
+            n.add(""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "ArrayList "+(end-start)/1000.0 );
+
+        start = System.currentTimeMillis();
+        for(int i = 0; i < 1000000; i++)
+            m.add(""+i);
+        end = System.currentTimeMillis();
+        System.out.println( "LinkedList "+(end-start)/1000.0 );
+
+        
     }
 }
