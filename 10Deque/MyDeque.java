@@ -42,7 +42,7 @@ public class MyDeque<T>{
     public T getLast(){
 	return data[end];
     }
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")    
     public void expand(){
 	int ctr = 0;
 	if (start<end){
