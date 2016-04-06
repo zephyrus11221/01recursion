@@ -8,14 +8,41 @@ public class MyDeque<T>{
     }
     
     public void addLast(T n){
+	if (end+1==data.length){
+	    if (start==0){
+		expand();
+	    }else{
+		end = 0;
+	    }
+	}
+	if (end+1==start){
+	    expand();
+	}
 	data[end]=n;
     }
 
+    public void addStart(T n){
+	if (start==0){
+	    if (end<data.length-1){
+		start = data.length-1;
+	    }else{
+		expand();
+	    }
+	}
+	if (start-1==end){
+	    expand();
+	}
+	data[start]=n;
+    }
+    
     public T getStart(){
 	return data[start];
     }
     
-    @SuppressWarnings("unchecked")	    
+    public T getLast(){
+	return data[end];
+    }
+    @SuppressWarnings("unchecked")
     public void expand(){
 	int ctr = 0;
 	if (start<end){
@@ -39,6 +66,7 @@ public class MyDeque<T>{
 	end = x;
 	start = 0;
     }
+    
     public static void main(String[]args){
 	MyDeque<String> x = new MyDeque<String>();
 	x.addLast("fish");
