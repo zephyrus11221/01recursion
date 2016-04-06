@@ -40,15 +40,21 @@ public class MyStack<T>{
 	System.out.println(a.peek());
 	a.pop();
 	System.out.println("AAAAAAAAAAAAAAAAAAAGHAGHGHGHGHGHGHHGHGHGHGGHGHGGGHHGGHGHHHGGHGHGHHGGGHHGH");
-	
+	int x = 0;
 	Random rand = new Random(0);
 	for(int i = 0; i < 6000; i++){
 	    int op = rand.nextInt(4);
-	    if(op == 0 || a.isEmpty()){
+	    if(op >1 || a.isEmpty()){
 		a.push(""+i);
+		x++;
 	    }else{
 		a.pop();
+		x--;
 	    }
+	}
+	while(x>0){
+	    System.out.print(a.pop());
+	    x--;
 	}
     }
 }

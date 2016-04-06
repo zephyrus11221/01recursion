@@ -1,0 +1,29 @@
+public class MyDeque<T>{
+    private T data;
+    private int start, end
+    @SuppressWarnings("unchecked")	    
+    public Tester(){
+	//typecast object array to generic array
+	data = (T[]) new Object[10];
+    }
+    
+    public void addLast(T n){
+	data[end]=n;
+    }
+
+    public T getStart(){
+	return data[Start];
+    }
+    
+    public void expand(){
+	int ctr = 0;
+	if (start<end){
+	    ctr = end-start;
+	}
+    }
+    public static void main(String[]args){
+	Tester<String> x = new Tester<String>();
+	x.add("fish");
+	System.out.println(x.get());
+    }
+}
