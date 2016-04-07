@@ -7,6 +7,10 @@ public class MyDeque<T>{
 	data = (T[]) new Object[10];
     }
     
+    public boolean isEmpty(){
+	return data[start].equals(null);
+    }
+    
     public void addLast(T n){
 	if (end+1==data.length){
 	    if (start==0){
@@ -176,6 +180,8 @@ public class MyDeque<T>{
 	x.addStart("hiya");
 	System.out.println(x);
 	x.addStart("hiya");
+	System.out.println(x);
+	System.out.println(x.remLast());
 	System.out.println(x);
     }
 }
