@@ -67,6 +67,38 @@ public class MyDeque<T>{
 	start = 0;
     }
     
+    public String toString(){
+	String otpt = "[";
+	if (start==end){
+	    otpt+=(String)data[start];
+	}
+	int x = start;
+	if(start<end){
+	    while (x<=end){
+		otpt+=data[x];
+		x++;
+		if(start!=end){
+		    otpt+=", ";
+		}
+	    }
+	}
+	else{
+	    while(x<end){
+		otpt+=data[x];
+		x++;
+		if (x==data.length){
+		    x=0;
+		}
+		if(start!=end){
+		    otpt+=", ";
+		}		
+	    }
+	}
+	otpt+="]";
+	return otpt+data.length;
+
+    }
+    
     public static void main(String[]args){
 	MyDeque<String> x = new MyDeque<String>();
 	x.addLast("fish");
