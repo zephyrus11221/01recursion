@@ -136,6 +136,7 @@ public class MyDeque<T>{
 	x.addStart("hiya");
 	System.out.println(x);
 	System.out.println(x.remStart());
+	System.out.println(x);
 	x.addStart("hiya");
 	System.out.println(x);
 	x.addStart("hiya");
