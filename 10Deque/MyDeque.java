@@ -58,6 +58,26 @@ public class MyDeque<T>{
 	return ret;
     }
 
+    public T remLast(){
+	T ret;
+	if(start!=end){
+	    if(end==0){
+		ret = data[end];
+		data[end]=null;
+		end=data.length-1;
+		return ret;
+	    }else{
+		ret = data[end];
+		data[end]=null;
+		end--;
+		return ret;
+	    }
+	}
+	ret = data[end];
+	data[end]=null;
+	return ret;
+    }
+
     
     public T getStart(){
 	return data[start];
