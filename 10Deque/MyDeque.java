@@ -18,6 +18,7 @@ public class MyDeque<T>{
 	if (end+1==start){
 	    expand();
 	}
+	//	end++;
 	data[end]=n;
     }
 
@@ -29,11 +30,34 @@ public class MyDeque<T>{
 		expand();
 	    }
 	}
-	if (start-1==end){
+	else if (start-1==end){
 	    expand();
+	}else{
+	    start--;
 	}
 	data[start]=n;
     }
+    
+    public T remStart(){
+	T ret;
+	if(start!=end){
+	    if(start==data.length-1){
+		ret = data[start];
+		data[start]=null;
+		start=0;
+		return ret;
+	    }else{
+		ret = data[start];
+		data[start]=null;
+		start++;
+		return ret;
+	    }
+	}
+	ret = data[start];
+	data[start]=null;
+	return ret;
+    }
+
     
     public T getStart(){
 	return data[start];
@@ -52,9 +76,9 @@ public class MyDeque<T>{
 	}else{
 	    ctr = data.length-start+end;
 	}
-	T[] copy = (T[]) new Object[10];
+	T[] copy = (T[]) new Object[data.length*2];
 	int x = 0;
-	while (x<ctr){
+	while (x<ctr+1){
 	    copy[x]=data[start];
 	    x++;
 	    if(start==data.length-1){
@@ -63,17 +87,18 @@ public class MyDeque<T>{
 		start++;
 	    }
 	}
-	end = x;
+	end = x-1;
 	start = 0;
+	data=copy;
     }
     
     public String toString(){
 	String otpt = "[";
+	int x = start;
 	if (start==end){
 	    otpt+=(String)data[start];
 	}
-	int x = start;
-	if(start<end){
+	else if(start<end){
 	    while (x<=end){
 		otpt+=data[x];
 		x++;
@@ -82,20 +107,23 @@ public class MyDeque<T>{
 		}
 	    }
 	}
+	//	else if(start==end+1){
 	else{
-	    while(x<end){
-		otpt+=data[x];
+	    otpt+=data[x];
+	    while(x!=end){
 		x++;
+		if(x==data.length){
+		    x=0;
+		}
+		otpt+=", ";
+		otpt+=data[x];
 		if (x==data.length){
 		    x=0;
 		}
-		if(start!=end){
-		    otpt+=", ";
-		}		
 	    }
 	}
 	otpt+="]";
-	return otpt+data.length;
+	return otpt+data.length+" "+start+" "+end;
 
     }
     
@@ -103,5 +131,30 @@ public class MyDeque<T>{
 	MyDeque<String> x = new MyDeque<String>();
 	x.addLast("fish");
 	System.out.println(x.getStart());
+	System.out.println(x);
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	System.out.println(x.remStart());
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
+	x.addStart("hiya");
+	System.out.println(x);
     }
 }
