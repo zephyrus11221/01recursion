@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyDeque<T>{
     private T[] data;
     private int start, end;
@@ -8,41 +9,62 @@ public class MyDeque<T>{
     }
     
     public boolean isEmpty(){
-	return data[start].equals(null);
+	return data[start]==null;
+    }
+    
+    public int size(){
+	if (start<end){
+	    return end-start+1;
+	}else{
+	    return data.length-start+end;
+	}
     }
     
     public void addLast(T n){
-	if (end+1==data.length){
-	    if (start==0){
+	if (isEmpty()){
+	    System.out.println("hello");
+	    data[start]=n;
+	}
+	else{ 
+	    if (end==data.length-1){
+		if (start>0){
+		    end = 0;
+		}else{
+		    expand();
+		}
+	    }
+	    else if (start-1==end){
 		expand();
 	    }else{
-		end = 0;
+		end++;
 	    }
+	    data[end]=n;
 	}
-	if (end+1==start){
-	    expand();
-	}
-	//	end++;
-	data[end]=n;
     }
 
-    public void addStart(T n){
-	if (start==0){
-	    if (end<data.length-1){
-		start = data.length-1;
-	    }else{
-		expand();
+    public void addFirst(T n){
+	if (isEmpty()){
+	    System.out.println("hello");
+	    data[start]=n;
+	}
+	else{ 
+	    if (start==0){
+		if (end<data.length-1){
+		    start = data.length-1;
+		}else{
+		    expand();
+		}
 	    }
+	    else if (start-1==end){
+		expand();
+	    }else{
+		start--;
+	    }
+	    data[start]=n;
 	}
-	else if (start-1==end){
-	    expand();
-	}else{
-	    start--;
-	}
-	data[start]=n;
     }
     
-    public T remStart(){
+    public T removeFirst(){
 	T ret;
 	if(start!=end){
 	    if(start==data.length-1){
@@ -62,7 +84,7 @@ public class MyDeque<T>{
 	return ret;
     }
 
-    public T remLast(){
+    public T removeLast(){
 	T ret;
 	if(start!=end){
 	    if(end==0){
@@ -83,7 +105,7 @@ public class MyDeque<T>{
     }
 
     
-    public T getStart(){
+    public T getFirst(){
 	return data[start];
     }
     
@@ -92,14 +114,7 @@ public class MyDeque<T>{
     }
     @SuppressWarnings("unchecked")    
     public void expand(){
-	int ctr = 0;
-	if (start<end){
-	    ctr = end-start+1;
-	}else if(start==end){
-	    ctr = 1;
-	}else{
-	    ctr = data.length-start+end;
-	}
+	int ctr = size();
 	T[] copy = (T[]) new Object[data.length*2];
 	int x = 0;
 	while (x<ctr+1){
@@ -152,36 +167,189 @@ public class MyDeque<T>{
     }
     
     public static void main(String[]args){
-	MyDeque<String> x = new MyDeque<String>();
-	x.addLast("fish");
-	System.out.println(x.getStart());
-	System.out.println(x);
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	System.out.println(x.remStart());
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	x.addStart("hiya");
-	System.out.println(x);
-	System.out.println(x.remLast());
-	System.out.println(x);
+
+      
+
+
+
+        MyDeque<Integer> d = new MyDeque<Integer>();
+
+
+        ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
+
+
+
+
+
+       // Limit the number of times addFirst and addLast is done
+
+
+ 
+
+
+        int limit = 1000000;
+
+
+ 
+
+
+        if (args.length > 0) {
+
+
+            limit = Integer.parseInt(args[0]);
+
+
+        }
+
+
+ 
+
+
+        // Add to the head and to the tail
+
+
+ 
+
+
+        for (int i = 0; i < limit/2; i++) {
+
+
+            Integer r1 = (int) (Math.random() * 1000000);
+
+
+ 
+
+
+            // Add first
+
+
+            d.addFirst(r1);
+
+
+            ad.addFirst(r1);
+
+
+        }
+
+
+        
+
+
+        for (int i = 0; i < limit/2; i++) {
+
+
+            Integer r2 = (int) (Math.random() * 1000000);
+
+
+            // Add last
+
+
+            d.addLast(r2);
+
+
+            ad.addLast(r2);
+
+
+        }
+
+
+ 
+
+
+        // Test if adding worked by removing elements
+
+
+ 
+
+
+        for (int i = 0; i < limit; i++) {
+
+
+            if (!d.getFirst().equals(ad.getFirst())) {
+
+
+                System.out.println("Test #0 (addFirst) failed at: " + i + "!");
+
+
+                System.exit(0);
+
+
+            }
+
+
+ 
+
+
+            if (!d.getLast().equals(ad.getLast())) {
+
+
+                System.out.println("Test #1 (addLast) failed at: " + i + "!");
+
+
+                System.exit(0);
+
+
+            }
+
+
+ 
+
+
+            if (!d.removeFirst().equals(ad.removeFirst())) {
+
+
+                System.out.println("Test #2 (removeFirst) failed at: " + i + "!");
+
+
+                System.exit(0);
+
+
+            }
+
+
+ 
+
+
+            if (!d.removeLast().equals(ad.removeLast())) {
+
+
+                System.out.println("Test #3 (removeLast) failed at: " + i + "!");
+
+
+                System.exit(0);
+
+
+            }
+
+
+        }
+
+
+
+
+
+        // Sizes should be equal
+ 
+
+
+        if (d.size() != ad.size()) {
+
+
+            System.out.println("Not equal sizes. Error!");
+
+
+            System.exit(0);
+
+
+        }
+
+
+
+
+
+        System.out.println("Success!");
+
+
     }
+    
 }

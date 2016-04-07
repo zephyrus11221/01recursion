@@ -1,0 +1,9 @@
+public class Driver{
+    MyDeque<int> a = new MyDeque();
+    a.addLast(1);
+    System.out.println(a);
+    for (int x = 0; x<25; x++){
+	a.addLast(x);
+	System.out.println(a);
+    }
+}
