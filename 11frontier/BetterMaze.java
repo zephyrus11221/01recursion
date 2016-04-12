@@ -3,13 +3,18 @@ import java.io.*;
 
 public class BetterMaze{
     private class Node{
-	private int x, y;
+	private int r, c;
 	private Node next, prev;
-	public int getX(){
-	    return x;
+	
+	public Node(int r1, int c1){
+	    r = r1;
+	    c = c1;
 	}
-	public int getY(){
-	    return y;
+	public int getR(){
+	    return r;
+	}
+	public int getC(){
+	    return c;
 	}
 	public void setNext(Node n){
 	    next = n;
@@ -17,9 +22,9 @@ public class BetterMaze{
 	public void setPrev(Node n){
 	    prev = n;
 	}
-	public void setValue(int x1, int y1){
-	    x = x1;
-	    y = y1;
+	public void setValue(int r1, int c1){
+	    r = r1;
+	    c = c1;
 	}
 	public Node getNext(){
 	    return next;
@@ -52,26 +57,52 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
-	return false;
+        placesToGo = new FrontierQueue<Node>();
+	placesToGo.add(new Node(startRow,startCol));
+	    
+	return solve();
     }   
-
 
    /**initialize the frontier as a stack and call solve
     */ 
     public boolean solveDFS(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+	placesToGo = new FrontierStack<Node>();
+	placesToGo.add(new Node(startRow,startCol));
+	
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
       Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){  
-        /** IMPLEMENT THIS **/  
+	while (placesToGo.hasNext()){
+	    Node hold = placesToGo.next();
+
+	}
 	return false;
     }    
      
+    public ArrayList<Node> checkNeighbors(Node n){
+	int r = n.getR();
+	int c = n.getC();
+	ArrayList<Node> otpt = new ArrayList<Node>();
+	if (maze[r+1][c]==' '){
+	    otpt.add(new Node(r+1,c));
+	}
+	if (maze[r-1][c]==' '){
+	    otpt.add(new Node(r-1,c));
+	}
+	if (maze[r][c+1]==' '){
+	    otpt.add(new Node(r,c+1));
+	}
+	if (maze[r][c-1]==' '){
+	    otpt.add(new Node(r,c-1));
+	}
+	return otpt;
+    }
+
+
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
 

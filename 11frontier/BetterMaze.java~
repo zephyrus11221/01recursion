@@ -4,12 +4,28 @@ import java.io.*;
 public class BetterMaze{
     private class Node{
 	private int x, y;
-	private LNode next, prev;
-	public T getX(){
+	private Node next, prev;
+	public int getX(){
 	    return x;
 	}
-	public T getY(){
+	public int getY(){
 	    return y;
+	}
+	public void setNext(Node n){
+	    next = n;
+	}
+	public void setPrev(Node n){
+	    prev = n;
+	}
+	public void setValue(int x1, int y1){
+	    x = x1;
+	    y = y1;
+	}
+	public Node getNext(){
+	    return next;
+	}
+	public Node getPrev(){
+	    return prev;
 	}
     }
 
