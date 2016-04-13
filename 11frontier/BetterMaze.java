@@ -49,8 +49,18 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
     **/
     public int[] solutionCoordinates(Node n){
-        
-	return new int[1];
+        ArrayList<Integer> data = new ArrayList<Integer>();
+	Node current = n;
+	while (current!=null){
+	    data.add(current.getR());
+	    data.add(current.getC());
+	    current=current.getNext();
+	}
+	int[] otpt = new int[data.size()];
+	for (int x = 0; x<data.size(); x++){
+	    otpt[x]=data.get(x);
+	}
+	return otpt;
     }    
 
 
