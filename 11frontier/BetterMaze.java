@@ -48,8 +48,8 @@ public class BetterMaze{
      *(otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
     **/
-    public int[] solutionCoordinates(){
-        /** IMPLEMENT THIS **/      
+    public int[] solutionCoordinates(Node n){
+        
 	return new int[1];
     }    
 
@@ -78,7 +78,12 @@ public class BetterMaze{
     private boolean solve(){  
 	while (placesToGo.hasNext()){
 	    Node hold = placesToGo.next();
-
+	    int r = hold.getR();
+	    int c = hold.getC();
+	    if (maze[r][c]=='E'){
+		System.out.println(solutionCoordinates(hold).toString());
+		return true;
+	    }
 	}
 	return false;
     }    
@@ -87,17 +92,26 @@ public class BetterMaze{
 	int r = n.getR();
 	int c = n.getC();
 	ArrayList<Node> otpt = new ArrayList<Node>();
+	Node _n;
 	if (maze[r+1][c]==' '){
-	    otpt.add(new Node(r+1,c));
+	    _n = new Node(r+1,c);
+	    _n.setPrev(n);
+	    otpt.add(_n);
 	}
 	if (maze[r-1][c]==' '){
-	    otpt.add(new Node(r-1,c));
+	    _n = new Node(r-1,c);
+	    _n.setPrev(n);
+	    otpt.add(_n);
 	}
 	if (maze[r][c+1]==' '){
-	    otpt.add(new Node(r,c+1));
+	    _n = new Node(r,c+1);
+	    _n.setPrev(n);
+	    otpt.add(_n);	
 	}
 	if (maze[r][c-1]==' '){
-	    otpt.add(new Node(r,c-1));
+	    _n = new Node(r,c-1);
+	    _n.setPrev(n);
+	    otpt.add(_n);
 	}
 	return otpt;
     }
