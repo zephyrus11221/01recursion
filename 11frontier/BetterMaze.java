@@ -56,11 +56,11 @@ public class BetterMaze{
 	    data.add(current.getC());
 	    current=current.getNext();
 	}
-	int[] otpt = new int[data.size()];
+	solution = new int[data.size()];
 	for (int x = 0; x<data.size(); x++){
-	    otpt[x]=data.get(x);
+	    solution[x]=data.get(x);
 	}
-	return otpt;
+	return solution;
     }    
 
 
@@ -87,11 +87,15 @@ public class BetterMaze{
     **/
     private boolean solve(){  
 	while (placesToGo.hasNext()){
+	    wait(100);
+	    System.out.println(this);
 	    Node hold = placesToGo.next();
 	    int r = hold.getR();
 	    int c = hold.getC();
 	    if (maze[r][c]=='E'){
-		System.out.println(solutionCoordinates(hold).toString());
+		solutionCoordinates(hold);
+		String otpt = Arrays.toString(solution);
+		System.out.println(otpt);
 		return true;
 	    }
 	    checkNeighbors(hold);
@@ -103,35 +107,38 @@ public class BetterMaze{
 	int r = n.getR();
 	int c = n.getC();
 	Node _n;
-	if (maze[r+1][c]==' '){
+	maze[r][c]='.';
+	if (maze[r+1][c]==' '||maze[r+1][c]=='E'){
 	    _n = new Node(r+1,c);
 	    _n.setPrev(n);
-	    maze[r+1][c]='X';
+	    //	    maze[r+1][c]='X';
 	    placesToGo.add(_n);
 	}
-	if (maze[r-1][c]==' '){
+	if (maze[r-1][c]==' '||maze[r-1][c]=='E'){
 	    _n = new Node(r-1,c);
 	    _n.setPrev(n);
-	    maze[r-1][c]='X';
+	    //	    maze[r-1][c]='X';
 	    placesToGo.add(_n);
 	}
-	if (maze[r][c+1]==' '){
+	if (maze[r][c+1]==' '||maze[r][c+1]=='E'){
 	    _n = new Node(r,c+1);
 	    _n.setPrev(n);
-	    maze[r][c+1]='X';
+	    //	    maze[r][c+1]='X';
 	    placesToGo.add(_n);	
 	}
-	if (maze[r][c-1]==' '){
+	if (maze[r][c-1]==' '||maze[r][c-1]=='E'){
 	    _n = new Node(r,c-1);
 	    _n.setPrev(n);
-	    maze[r][c-1]='X';
+	    //	    maze[r][c-1]='X';
 	    placesToGo.add(_n);
 	}
     }
 
 
    /**mutator for the animate variable  **/
-    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+    public void setAnimate(boolean b){
+	animate=b;
+    }    
 
 
     public BetterMaze(String filename){
