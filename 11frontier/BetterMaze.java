@@ -94,36 +94,39 @@ public class BetterMaze{
 		System.out.println(solutionCoordinates(hold).toString());
 		return true;
 	    }
+	    checkNeighbors(hold);
 	}
 	return false;
     }    
      
-    public ArrayList<Node> checkNeighbors(Node n){
+    public void checkNeighbors(Node n){
 	int r = n.getR();
 	int c = n.getC();
-	ArrayList<Node> otpt = new ArrayList<Node>();
 	Node _n;
 	if (maze[r+1][c]==' '){
 	    _n = new Node(r+1,c);
 	    _n.setPrev(n);
-	    otpt.add(_n);
+	    maze[r+1][c]='X';
+	    placesToGo.add(_n);
 	}
 	if (maze[r-1][c]==' '){
 	    _n = new Node(r-1,c);
 	    _n.setPrev(n);
-	    otpt.add(_n);
+	    maze[r-1][c]='X';
+	    placesToGo.add(_n);
 	}
 	if (maze[r][c+1]==' '){
 	    _n = new Node(r,c+1);
 	    _n.setPrev(n);
-	    otpt.add(_n);	
+	    maze[r][c+1]='X';
+	    placesToGo.add(_n);	
 	}
 	if (maze[r][c-1]==' '){
 	    _n = new Node(r,c-1);
 	    _n.setPrev(n);
-	    otpt.add(_n);
+	    maze[r][c-1]='X';
+	    placesToGo.add(_n);
 	}
-	return otpt;
     }
 
 
