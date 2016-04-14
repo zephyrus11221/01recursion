@@ -54,7 +54,7 @@ public class BetterMaze{
 	while (current!=null){
 	    data.add(current.getR());
 	    data.add(current.getC());
-	    current=current.getNext();
+	    current=current.getPrev();
 	}
 	solution = new int[data.size()];
 	for (int x = 0; x<data.size(); x++){
@@ -67,9 +67,9 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        placesToGo = new FrontierQueue<Node>();
-	placesToGo.add(new Node(startRow,startCol));
-	    
+        placesToGo = new FrontierQueue<Node>(new Node(startRow, startCol));
+	//	placesToGo.add(new Node(startRow,startCol));
+	System.out.println(placesToGo.hasNext());
 	return solve();
     }   
 
@@ -224,7 +224,8 @@ public class BetterMaze{
 	    char c =  maze[i / maxc][i % maxc];
 	    if(c == '#'){
 		ans += color(38,47)+c;
-	    }else{
+	    }
+	    else{
 		ans += color(33,40)+c;
 	    }
 	}

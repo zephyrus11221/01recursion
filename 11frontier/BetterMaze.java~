@@ -48,18 +48,28 @@ public class BetterMaze{
      *(otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
     **/
-    public int[] solutionCoordinates(){
-        /** IMPLEMENT THIS **/      
-	return new int[1];
+    public int[] solutionCoordinates(Node n){
+        ArrayList<Integer> data = new ArrayList<Integer>();
+	Node current = n;
+	while (current!=null){
+	    data.add(current.getR());
+	    data.add(current.getC());
+	    current=current.getNext();
+	}
+	solution = new int[data.size()];
+	for (int x = 0; x<data.size(); x++){
+	    solution[x]=data.get(x);
+	}
+	return solution;
     }    
 
 
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        placesToGo = new FrontierQueue<Node>();
-	placesToGo.add(new Node(startRow,startCol));
-	    
+        placesToGo = new FrontierQueue<Node>(new Node(startRow, startCol));
+	//	placesToGo.add(new Node(startRow,startCol));
+	System.out.println(placesToGo.hasNext());
 	return solve();
     }   
 
@@ -77,34 +87,58 @@ public class BetterMaze{
     **/
     private boolean solve(){  
 	while (placesToGo.hasNext()){
+	    wait(100);
+	    System.out.println(this);
 	    Node hold = placesToGo.next();
-
+	    int r = hold.getR();
+	    int c = hold.getC();
+	    if (maze[r][c]=='E'){
+		solutionCoordinates(hold);
+		String otpt = Arrays.toString(solution);
+		System.out.println(otpt);
+		return true;
+	    }
+	    checkNeighbors(hold);
 	}
 	return false;
     }    
      
-    public ArrayList<Node> checkNeighbors(Node n){
+    public void checkNeighbors(Node n){
 	int r = n.getR();
 	int c = n.getC();
-	ArrayList<Node> otpt = new ArrayList<Node>();
-	if (maze[r+1][c]==' '){
-	    otpt.add(new Node(r+1,c));
+	Node _n;
+	maze[r][c]='.';
+	if (maze[r+1][c]==' '||maze[r+1][c]=='E'){
+	    _n = new Node(r+1,c);
+	    _n.setPrev(n);
+	    //	    maze[r+1][c]='X';
+	    placesToGo.add(_n);
 	}
-	if (maze[r-1][c]==' '){
-	    otpt.add(new Node(r-1,c));
+	if (maze[r-1][c]==' '||maze[r-1][c]=='E'){
+	    _n = new Node(r-1,c);
+	    _n.setPrev(n);
+	    //	    maze[r-1][c]='X';
+	    placesToGo.add(_n);
 	}
-	if (maze[r][c+1]==' '){
-	    otpt.add(new Node(r,c+1));
+	if (maze[r][c+1]==' '||maze[r][c+1]=='E'){
+	    _n = new Node(r,c+1);
+	    _n.setPrev(n);
+	    //	    maze[r][c+1]='X';
+	    placesToGo.add(_n);	
 	}
-	if (maze[r][c-1]==' '){
-	    otpt.add(new Node(r,c-1));
+	if (maze[r][c-1]==' '||maze[r][c-1]=='E'){
+	    _n = new Node(r,c-1);
+	    _n.setPrev(n);
+	    //	    maze[r][c-1]='X';
+	    placesToGo.add(_n);
 	}
-	return otpt;
     }
 
 
    /**mutator for the animate variable  **/
-    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+    public void setAnimate(boolean b){
+	animate=b;
+    }    
 
 
     public BetterMaze(String filename){

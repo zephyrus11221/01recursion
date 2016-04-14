@@ -1,6 +1,11 @@
 import java.util.*;
 public class FrontierQueue<T> implements Frontier<T>{
-    public Queue<T> data = new Queue<T>();
+    public ArrayDeque<T> data;
+
+    public FrontierQueue(T element){
+	data = new ArrayDeque<T>();
+	data.add(element);
+    }
 
     public void add(T element){
         data.add(element);

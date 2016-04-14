@@ -1,6 +1,11 @@
 import java.util.*;
 public class FrontierQueue<T> implements Frontier<T>{
-    public ArrayDeque<T> data = new ArrayDeque<T>();
+    public ArrayDeque<T> data;
+
+    public FrontierQueue(T element){
+	data = new ArrayDeque<T>();
+	data.add(element);
+    }
 
     public void add(T element){
         data.add(element);
@@ -11,7 +16,7 @@ public class FrontierQueue<T> implements Frontier<T>{
     }
     
     public boolean hasNext(){
-	return !isEmpty();
+	return !data.isEmpty();
     }
 
 }
