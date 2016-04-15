@@ -94,6 +94,7 @@ public class BetterMaze{
 	    int c = hold.getC();
 	    if (maze[r][c]=='E'){
 		solutionCoordinates(hold);
+		System.out.println(printSolution());
 		String otpt = Arrays.toString(solution);
 		System.out.println(otpt);
 		return true;
@@ -209,6 +210,35 @@ public class BetterMaze{
 	}
     }
 
+    public String printSolution(){
+	int maxr = maze.length;
+	int maxc = maze[0].length;
+	String ans = "";
+	if(animate){
+	    ans = "Solving a maze that is " + maxr + " by " + maxc + "\n";
+	}
+	for (int x = 0; x<solution.length; x+=2){
+	    maze[solution[x]][solution[x+1]]='X';
+	}
+	for(int i = 0; i < maxc * maxr; i++){
+	    if(i % maxc == 0 && i != 0){
+		ans += color(37,40) + "\n";
+	    }
+	    char c =  maze[i / maxc][i % maxc];
+	    if(c == '#'){
+		ans += color(38,47)+c;
+	    }
+	    else{
+		ans += color(33,40)+c;
+	    }
+	}
+	//nice animation string
+	if(animate){
+	    return HIDE_CURSOR + go(0,0) + ans + color(37,40) +"\n"+ SHOW_CURSOR + color(37,40);
+	}else{
+	    return ans + color(37,40) + "\n";
+	}
+    }	
 
     public String toString(){
 	int maxr = maze.length;
