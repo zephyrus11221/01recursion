@@ -1,4 +1,5 @@
-public class BSTree <T extends comparable<T>>{
+import java.util.*;
+public class BSTree <T extends Comparable<T>>{
     private class Node{
 	T data;
 	Node left;
@@ -29,7 +30,10 @@ public class BSTree <T extends comparable<T>>{
 	}
 	
 	public int height(){
-	    
+	    if (getLeft().height()>getRight().height()){
+		return getLeft().height()+1;
+	    }
+	    return getRight().height()+1;
 	}
 	
 	public void add(T value){
@@ -41,7 +45,15 @@ public class BSTree <T extends comparable<T>>{
 	}
 	
 	public String toString(){
-
+	    String otpt = "";
+	    if (left==null&&right!=null){
+		otpt+=data+right;
+	    }else if (right==null){
+		otpt+=data+left;
+	    }
+	    if (left==null&&right==null){
+		otpt+=data;
+	    return otpt;
 	}
     }
 }

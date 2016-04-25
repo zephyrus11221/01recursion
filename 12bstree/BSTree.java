@@ -30,14 +30,26 @@ public class BSTree <T extends Comparable<T>>{
 	}
 	
 	public int height(){
-	    if (getLeft().height()>getRight().height()){
+	    if (left.height()>right.height()){
 		return getLeft().height()+1;
 	    }
 	    return getRight().height()+1;
 	}
 	
 	public void add(T value){
-	    
+	    if(data.compareTo(value)<0){
+		if (left==null){
+		    left.set(value);
+		}else{
+		    left.add(value);
+		}
+	    }else{
+		if (right==null){
+		    right.set(value);
+		}else{
+		    right.add(value);
+		}
+	    }
 	}
 	
 	public boolean contains(){
@@ -46,6 +58,14 @@ public class BSTree <T extends Comparable<T>>{
 	
 	public String toString(){
 	    String otpt = "";
+	    if (left==null&&right!=null){
+		otpt+=data+right.toString();
+	    }else if (right==null){
+		otpt+=data+left.toString();
+	    }
+	    if (left==null&&right==null){
+		otpt+=data;
+	    }
 	    return otpt;
 	}
     }
