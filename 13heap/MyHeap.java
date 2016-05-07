@@ -65,7 +65,7 @@ public class MyHeap<T extends Comparable<T>>{
     }
 	
     public String toString(){
-	return "";
+	return data.toString();
     }
 	
 	//do this last
