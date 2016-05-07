@@ -1,0 +1,54 @@
+import java.util.*;
+@SuppressWarnings("unchecked")
+public class MyHeap<T extends Comparable<T>>{
+    private int size;
+    private T[] data;
+    
+    public MyHeap(){}
+    
+    public MyHeap(T[] array){
+	int size = array.length;
+	data = (T) new Comparable[size+1];
+	for (int x = 1; x<data.length; x++){
+	    data[x]=array[x-1];
+	}
+    }
+    
+    private void pushDown(int k){
+	T temp = data[k];
+	data[k]=data[k*2];
+	data[k*2]=temp;
+    }
+    
+    private void pushUp(int k){
+	T temp = data[k];
+	data[k]=data[k/2];
+	data[k/2]=temp;
+    }
+		
+    private void heapify(){
+	for (int x = size; x>0; x++){
+	    if(data[x].compareTo(data[x/2]>0)){
+		pushUp(x);
+	    }
+	}
+    }
+    /*
+    public T delete(){
+	T otpt;
+	return otpt;
+    }
+	*/
+    public void add(T x){
+	
+    }
+	
+	private void doubleSize()
+	
+	public String toString()
+	
+	//do this last
+	public MyHeap(boolean isMax)
+	public MyHeap(T[] array, boolean isMax)
+	
+	}
