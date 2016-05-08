@@ -1,0 +1,6 @@
+public class Driver{
+    MyHeap<Integer> a = new MyHeap<Integer>();
+    a.add(10);
+
+
+}
