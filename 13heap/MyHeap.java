@@ -13,11 +13,11 @@ public class MyHeap<T extends Comparable<T>>{
     
     public MyHeap(T[] array){
 	data = (T[]) new Comparable[array.length+1];
-	size++;
+	isItMax = true;
+	size = 0;
 	for (int x = 1; x<array.length+1; x++){
 	    add(array[x-1]);
 	}
-	isItMax = true;
     }
     
     private void pushDown(int k){
@@ -115,11 +115,11 @@ public class MyHeap<T extends Comparable<T>>{
 	String otpt = "["+data[1];
 	System.out.println(size);
 	for (int x = 2; x<size+1; x++){
-	    System.out.println(x);
+	    //	    System.out.println(x);
 	    otpt+=" " + data[x].toString();
 	}
 	otpt += "]";
-	System.out.println("hello");
+	//	System.out.println("hello");
 	return otpt;
     }
 	

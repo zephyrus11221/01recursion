@@ -3,23 +3,21 @@ import java.util.*;
 public class MyHeap<T extends Comparable<T>>{
     private int size;
     private T[] data;
+    private boolean isItMax;
     
     public MyHeap(){
 	data = (T[]) new Comparable[2];
 	size = 0;
+	isItMax = true;
     }
     
     public MyHeap(T[] array){
-	size = array.length;
-	System.out.println(size);
-	data = (T[]) new Comparable[size+1];
+	data = (T[]) new Comparable[array.length+1];
+	size++;
 	for (int x = 1; x<array.length+1; x++){
-	    System.out.println(array[x-1]);
-	    data[x]=array[x-1];
-	    System.out.println(data[x]);
+	    add(array[x-1]);
 	}
-	System.out.println(this);
-	heapify();
+	isItMax = true;
     }
     
     private void pushDown(int k){
@@ -42,26 +40,40 @@ public class MyHeap<T extends Comparable<T>>{
 		
     private void heapify(){
 	boolean wrong = true;
-	while(wrong){
-	    wrong = false;
-	    for (int x = size/2; x>0; x--){
-		//		try{
-		System.out.println(x);
-		System.out.println("hello");
-		if (x*2+1>size){}
-		else  if(data[x].compareTo(data[x*2])<0 || data[x].compareTo(data[x*2+1])<0){
+	if (isItMax){
+	    while(wrong){
+		wrong = false;
+		for (int x = size/2; x>0; x--){
+		    if (x*2+1>size){}
+		    else if(data[x].compareTo(data[x*2])<0 || data[x].compareTo(data[x*2+1])<0){
 			wrong = true;
 			pushDown(x);
-			//		    }
-		}//catch(IndexOutOfBoundsException e){}
+		    }
+		}
 	    }
-	}
+	}else{
+	    while(wrong){
+		wrong = false;
+		for (int x = size/2; x>0; x--){
+		    if (x*2+1>size){}
+		    else if(data[x].compareTo(data[x*2])>0 || data[x].compareTo(data[x*2+1])>0){
+			wrong = true;
+			pushDown(x);
+		    }
+		}
+	    }
+	}	    
     }
 
     public T delete(){
 	T otpt = data[1];
-	
-
+	T[] temp = data;
+	int _size = size+1;
+	data = (T[]) new Comparable[data.length];
+	size = 0;
+	for (int x = 2; x<_size; x++){
+	    add(temp[x]);
+	}
 	return otpt;
     }
 
@@ -80,13 +92,22 @@ public class MyHeap<T extends Comparable<T>>{
 	size++;
 	int index = size;
 	data[size]=x;
-	if (!(size==1)){
-	    while(index>1 && data[index].compareTo(data[index/2])>0){
-		System.out.println(index);
-		System.out.println(data[index]);
-		pushUp(index);
-		index/=2;
+	if (isItMax){
+	    if (!(size==1)){
+		while(index>1 && data[index].compareTo(data[index/2])>0){
+		    pushUp(index);
+		    index/=2;
+		}
 	    }
+	}else{
+	    if (!(size==1)){
+		while(index>1 && data[index].compareTo(data[index/2])<0){
+		    System.out.println(index);
+		    System.out.println(data[index]);
+		    pushUp(index);
+		    index/=2;
+		}
+	    }	    
 	}
     }
 	
@@ -98,13 +119,24 @@ public class MyHeap<T extends Comparable<T>>{
 	    otpt+=" " + data[x].toString();
 	}
 	otpt += "]";
+	System.out.println("hello");
 	return otpt;
     }
 	
 	//do this last
     public MyHeap(boolean isMax){
+	data = (T[]) new Comparable[2];
+	size = 0;
+	isItMax = isMax;
     }
     public MyHeap(T[] array, boolean isMax){
+	isMax = true;
+	size = array.length;
+	data = (T[]) new Comparable[size+1];
+	for (int x = 1; x<array.length+1; x++){
+	    data[x]=array[x-1];
+	}
+	heapify();
     }
 	
 }
