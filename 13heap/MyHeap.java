@@ -104,10 +104,16 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public T peek(){
+	if (size==0){
+	    throw new NoSuchElementException();
+	}
 	return data[1];
     }
 
     public T remove(){
+	if (size==0){
+	    throw new NoSuchElementException();
+	}
 	T otpt = data[1];
 	T[] temp = data;
 	int _size = size+1;
