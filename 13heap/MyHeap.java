@@ -22,50 +22,92 @@ public class MyHeap<T extends Comparable<T>>{
     
     private void pushDown(int k){
 	T temp = data[k];
-	if(k*2+1>size){}
-	else if (data[k*2].compareTo(data[k*2+1])>0){
-	    data[k]=data[k*2];
-	    data[k*2]=temp;
-  	}else{
-	    data[k]=data[k*2+1];
-	    data[k*2+1]=temp;	
-	}    
-    }
-    
-    private void pushUp(int k){
-	T temp = data[k];
-	data[k]=data[k/2];
-	data[k/2]=temp;
-    }
-		
-    private void heapify(){
 	boolean wrong = true;
-	if (isItMax){
+	if(isItMax){
 	    while(wrong){
 		wrong = false;
-		for (int x = size/2; x>0; x--){
-		    if (x*2+1>size){}
-		    else if(data[x].compareTo(data[x*2])<0 || data[x].compareTo(data[x*2+1])<0){
-			wrong = true;
-			pushDown(x);
-		    }
-		}
+		if (k*2+1>size){}
+		else if (data[k*2].compareTo(data[k*2+1])>0){
+		    data[k]=data[k*2];
+		    data[k*2]=temp;
+		    wrong = true;
+		    k*=2;
+		}else{
+		    data[k]=data[k*2+1];
+		    data[k*2+1]=temp;
+		    wrong = true;
+		    k = k*2+1;
+		}    
 	    }
 	}else{
 	    while(wrong){
 		wrong = false;
-		for (int x = size/2; x>0; x--){
-		    if (x*2+1>size){}
-		    else if(data[x].compareTo(data[x*2])>0 || data[x].compareTo(data[x*2+1])>0){
-			wrong = true;
-			pushDown(x);
-		    }
+		if (k*2+1>size){}
+		else if (data[k*2].compareTo(data[k*2+1])>0){
+		    data[k]=data[k*2];
+		    data[k*2]=temp;
+		    wrong = true;
+		    k*=2;
+		}else{
+		    data[k]=data[k*2+1];
+		    data[k*2+1]=temp;
+		    wrong = true;
+		    k = k*2+1;
+		}    
+	    }
+	    
+	}
+    }
+    
+    private void pushUp(int k){
+	T temp = data[k];
+	boolean wrong  = true;
+	if(isItMax){
+	    while(wrong&&k>1){
+		wrong = false;
+		if(data[k].compareTo(data[k/2])>0){
+		    wrong = true;
+		    data[k]=data[k/2];
+		    data[k/2]=temp;
+		    k/=2;
+		}
+	    }
+	}else{
+	    while(wrong&&k>1){
+		wrong = false;
+		if(data[k].compareTo(data[k/2])<0){
+		    wrong = true;
+		    data[k]=data[k/2];
+		    data[k/2]=temp;
+		    k/=2;
+		}
+	    }
+	}	    
+    }
+		
+    private void heapify(){
+	if (isItMax){
+	    for (int x = size/2; x>0; x--){
+		if (x*2+1>size){}
+		else if(data[x].compareTo(data[x*2])<0 || data[x].compareTo(data[x*2+1])<0){
+		    pushDown(x);
+		}
+	    }
+	}else{
+	    for (int x = size/2; x>0; x--){
+		if (x*2+1>size){}
+		else if(data[x].compareTo(data[x*2])>0 || data[x].compareTo(data[x*2+1])>0){
+		    pushDown(x);
 		}
 	    }
 	}	    
     }
 
-    public T delete(){
+    public T peek(){
+	return data[1];
+    }
+
+    public T remove(){
 	T otpt = data[1];
 	T[] temp = data;
 	int _size = size+1;
@@ -94,32 +136,22 @@ public class MyHeap<T extends Comparable<T>>{
 	data[size]=x;
 	if (isItMax){
 	    if (!(size==1)){
-		while(index>1 && data[index].compareTo(data[index/2])>0){
-		    pushUp(index);
-		    index/=2;
-		}
+		pushUp(index);
 	    }
 	}else{
 	    if (!(size==1)){
-		while(index>1 && data[index].compareTo(data[index/2])<0){
-		    System.out.println(index);
-		    System.out.println(data[index]);
-		    pushUp(index);
-		    index/=2;
-		}
-	    }	    
-	}
+		pushUp(index);
+		index/=2;
+	    }
+	}	    
     }
 	
     public String toString(){
 	String otpt = "["+data[1];
-	System.out.println(size);
 	for (int x = 2; x<size+1; x++){
-	    //	    System.out.println(x);
 	    otpt+=" " + data[x].toString();
 	}
 	otpt += "]";
-	//	System.out.println("hello");
 	return otpt;
     }
 	
@@ -130,7 +162,7 @@ public class MyHeap<T extends Comparable<T>>{
 	isItMax = isMax;
     }
     public MyHeap(T[] array, boolean isMax){
-	isMax = true;
+	isItMax = true;
 	size = array.length;
 	data = (T[]) new Comparable[size+1];
 	for (int x = 1; x<array.length+1; x++){
