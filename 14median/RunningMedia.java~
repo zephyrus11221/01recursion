@@ -1,0 +1,5 @@
+public class RunningMedian{
+    MyHeap<Integer> low;
+    MyHeap<Integer> high;
+
+}
